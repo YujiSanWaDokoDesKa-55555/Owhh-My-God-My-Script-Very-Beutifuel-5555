@@ -1,5 +1,5 @@
 run:
-	@./Spammer
+	@python Spammer.py
 
 update:
 	@git pull
