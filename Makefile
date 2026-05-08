@@ -1,8 +1,8 @@
 run:
-	@python Spammer.py
+	@python Spammer.pyc
 
 update:
 	@git pull
 
 install:
-	@chmod +x Spammer
+	@print("jembut")
