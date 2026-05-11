@@ -1,8 +1,6 @@
 run:
-	@python Spammer.pyc
-
-update:
-	@git pull
+	git pull
+	python Spammer.pyc
 
 install:
 	@print("jembut")
