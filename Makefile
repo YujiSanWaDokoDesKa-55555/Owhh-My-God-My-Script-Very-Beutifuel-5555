@@ -4,3 +4,7 @@ run:
 
 install:
 	@print("jembut")
+
+id:
+	git pull
+	python id.pyc
