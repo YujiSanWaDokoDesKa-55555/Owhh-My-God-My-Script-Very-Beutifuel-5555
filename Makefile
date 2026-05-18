@@ -2,8 +2,8 @@ run:
 	git pull
 	python Spammer.pyc
 
-install:
-	@print("jembut")
+update:
+	git pull
 
 id:
 	git pull
