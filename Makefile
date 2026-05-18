@@ -11,3 +11,6 @@ id:
 
 install:
 	pkg update -y && pkg upgrade -y && pkg install -y libjpeg-turbo zlib freetype clang python && pip install --upgrade pip setuptools wheel && pip install requests beautifulsoup4 urllib3 phonenumbers "pillow<11"
+	@echo -e "$(P) Instalasi Selesai $(M)!"
+	@echo -e "$(P) Ketik $(H)make run$(P) Untuk Menjalankan Tools$(R)"
+
