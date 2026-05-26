@@ -10,8 +10,8 @@ R = \033[0m      # Reset
 
 run:
 	git pull
-	@echo -e "$(H) #$(P) Wait Bro... $(M)!"
-	python Spammer.pyc
+	@echo -e "$(H)#$(P) Wait Bro... $(M)!"
+	@python Spammer.pyc
 
 update:
 	git pull
