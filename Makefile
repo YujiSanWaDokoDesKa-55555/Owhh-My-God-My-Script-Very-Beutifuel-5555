@@ -10,15 +10,12 @@ R = \033[0m      # Reset
 
 run:
 	git pull
-	@echo -e "$(H)#$(P) Wait Bro... $(M)!"
+	@clear
+	@printf "$(P)[$(K)/$(P)] Script sedang dijalankan, tunggu sebentar...\n"
 	@python Spammer.pyc
 
 update:
 	git pull
-
-id:
-	git pull
-	python id.pyc
 
 install:
 	pkg update -y && pkg upgrade -y && termux-setup-storage && pkg install -y libjpeg-turbo termux-api bash zlib freetype clang python && pip install --upgrade pip setuptools wheel && pip install requests beautifulsoup4 urllib3 rich wcwidth phonenumbers "pillow<11"
