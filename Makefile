@@ -9,16 +9,4 @@ C = \033[1;36m   # Cyan
 R = \033[0m      # Reset
 
 run:
-	git pull
-	@clear
-	@printf "$(P)[$(K)/$(P)] Script sedang dijalankan, tunggu sebentar...\n"
 	@python Spammer.pyc
-
-update:
-	git pull
-
-install:
-	pkg update -y && pkg upgrade -y && termux-setup-storage && pkg install -y libjpeg-turbo termux-api bash zlib freetype clang python && pip install --upgrade pip setuptools wheel && pip install requests beautifulsoup4 urllib3 rich wcwidth phonenumbers "pillow<11"
-	@clear
-	@printf "$(P)>>>> $(H)PROSES INSTALASI SCRIPT SELESAI $(P)<<<<\n"
-	@printf "$(P)Silahkan ketik $(K)make run$(P) untuk menjalankan\n"
