@@ -9,4 +9,4 @@ C = \033[1;36m   # Cyan
 R = \033[0m      # Reset
 
 run:
-	@python Spammer.pyc
+	@python run.py
