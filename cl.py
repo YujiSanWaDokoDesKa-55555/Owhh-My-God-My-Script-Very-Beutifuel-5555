@@ -24,12 +24,20 @@ def hide_cursor():
 def show_cursor():
     print("\033[?25h", end="", flush=True)
 
-atexit.register(show_cursor)
-
 fd = sys.stdin.fileno()
 old_settings = termios.tcgetattr(fd)
 
-tty.setcbreak(fd)
+atexit.register(show_cursor)
+
+def restore_terminal():
+    try:
+        termios.tcsetattr(
+            fd,
+            termios.TCSADRAIN,
+            old_settings
+        )
+    except:
+        pass
 
 def get_key():
     if select.select([sys.stdin], [], [], 0)[0]:
@@ -37,12 +45,13 @@ def get_key():
     return None
 
 os.system("clear")
-hide_cursor()
-
-last_status = None
 
 try:
+    tty.setcbreak(fd)
     hide_cursor()
+
+    last_status = None
+
     while True:
         cols = shutil.get_terminal_size().columns
 
@@ -68,6 +77,8 @@ try:
             key = get_key()
 
             if key and key.lower() == "y":
+
+                restore_terminal()
                 show_cursor()
 
                 print("\033[2J\033[H", end="", flush=True)
@@ -79,17 +90,10 @@ try:
                 sys.exit()
 
         time.sleep(0.05)
-        show_cursor()
 
 except KeyboardInterrupt:
     pass
-    show_cursor()
 
 finally:
-    termios.tcsetattr(
-        fd,
-        termios.TCSADRAIN,
-        old_settings
-    )
-
+    restore_terminal()
     show_cursor()
