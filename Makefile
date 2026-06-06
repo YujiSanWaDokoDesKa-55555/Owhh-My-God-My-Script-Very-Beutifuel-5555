@@ -10,4 +10,4 @@ R = \033[0m      # Reset
 
 run:
 	git pull
-	@python run.py
+	@python cl.py
