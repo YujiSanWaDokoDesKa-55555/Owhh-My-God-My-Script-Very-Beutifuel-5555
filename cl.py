@@ -83,10 +83,17 @@ try:
 
                 print("\033[2J\033[H", end="", flush=True)
 
+                import signal
+                signal.signal(signal.SIGINT, signal.SIG_IGN)
+
                 subprocess.run(
-                    [sys.executable, "run.py"]
+                    [sys.executable, "run.py"],
+                    stdin=sys.stdin,
+                    stdout=sys.stdout,
+                    stderr=sys.stderr
                 )
 
+                signal.signal(signal.SIGINT, signal.SIG_DFL)
                 sys.exit()
 
         time.sleep(0.05)
