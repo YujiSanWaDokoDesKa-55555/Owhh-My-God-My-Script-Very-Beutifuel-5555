@@ -252,12 +252,12 @@ def main():
 
     main_pyc = os.path.join(
         script_dir,
-        "Spammer.pyc"
+        "Spammer.py"
     )
 
     if not os.path.exists(main_pyc):
         print(
-            f"{p}  [{m}>{p}] File{h} Spammer.pyc {p}tidak ditemukan!"
+            f"{p}  [{m}>{p}] File{h} Spammer.py {p}tidak ditemukan!"
         )
         sys.exit(1)
 
