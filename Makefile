@@ -9,5 +9,4 @@ C = \033[1;36m   # Cyan
 R = \033[0m      # Reset
 
 run:
-	git pull
 	@python cl.py
