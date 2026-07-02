@@ -19,44 +19,31 @@ p = "\033[1;37m"
 o = "\033[38;5;214m"
 r = "\033[0m"
 
-VERSI_TOOLS = "4.9.3"
-RAW_USER_DB = "https://raw.githubusercontent.com/AjJwnskanKanskNwndbdoaOsmxmaBdqkNwknaa/XdbSpmPrm/main/user.json"
-RAW_VERSI_URL = "https://raw.githubusercontent.com/AjJwnskanKanskNwndbdoaOsmxmaBdqkNwknaa/XdbSpmPrm/main/versi.json"
-
-def get_user_database():
-    try:
-        session = requests.Session()
-        response = session.get(
-            "https://api.github.com/repos/"
-            "AjJwnskanKanskNwndbdoaOsmxmaBdqkNwknaa/"
-            "XdbSpmPrm/contents/user.json",
-            headers={"Accept": "application/vnd.github+json", "User-Agent": "Mozilla/5.0"},
-            timeout=3
-        )
-        response.raise_for_status()
-        data = response.json()
-        return json.loads(base64.b64decode(data["content"]).decode("utf-8"))
-    except Exception:
-        return None
+VERSI_TOOLS = "5.0.3"
+API_USER = "https://omg-nexus-api.vercel.app/total-user"
+API_VERSI = "https://omg-nexus-api.vercel.app/version"
 
 def jumlah_pengguna():
     try:
-        data = get_user_database()
-        total = len(data.get("users", []))
-        return total
-    except Exception:
-        return 0
+        resp = requests.get(API_USER, timeout=5)
+        if resp.status_code == 200:
+            data = resp.json()
+            if data.get("status"):
+                return data.get("total_user", 0)
+    except:
+        pass
+    return 0
 
 def cek_versi():
     try:
-        resp = requests.get(RAW_VERSI_URL, timeout=5)
+        resp = requests.get(API_VERSI, timeout=5)
         if resp.status_code == 200:
             data = resp.json()
-            versi_terbaru = data.get("versi", "")
-            return VERSI_TOOLS == versi_terbaru
-        return True
-    except Exception:
-        return True
+            if data.get("status"):
+                return VERSI_TOOLS == data.get("versi", "")
+    except:
+        pass
+    return True
 
 def banner_v1():
     user = jumlah_pengguna()
