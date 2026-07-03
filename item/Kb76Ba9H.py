@@ -19,7 +19,7 @@ p = "\033[1;37m"
 o = "\033[38;5;214m"
 r = "\033[0m"
 
-VERSI_TOOLS = "5.0.3"
+VERSI_TOOLS = "5.0.5"
 API_USER = "https://omg-nexus-api.vercel.app/total-user"
 API_VERSI = "https://omg-nexus-api.vercel.app/version"
 
@@ -137,7 +137,7 @@ def banner_v5():
     user = jumlah_pengguna()
     versi_valid = cek_versi()
     V = VERSI_TOOLS
-    jarak_user = " " * (16 - len(str(user)))
+    jarak_user = " " * (19 - len(str(user)))
     print(f"""{a}
 ╭─────────────────────────────────────────────────────────────╮
 │\033[1;35m ⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣤⣤⣤⣤⣤⣤⣤⣤⣤⣤⣀⣀⠀⠀⠀⠀⠀⠀                         {a}│
@@ -151,9 +151,9 @@ def banner_v5():
 │\033[1;35m ⠸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡁⠀⢹⣿⣿⣿⣿⣿⣿⣿⠀⠀{h}└─┘┴ ┴└─┘       {h}┘└┘└─┘┴ └─└─┘└─┘      {a}│
 │\033[1;35m ⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⢻⣿⣿⣿⣿⣿⣿⡇⠀{a} ────────────────────────────────     {a}│
 │\033[1;35m ⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠻⣿⣿⣿⣿⡿⠀ ⠀⠀                                    {a}│
-│\033[1;35m ⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠈⠙⠛⠋⠀⠀    ⠀ {h}ꫝ{p} Author       {m}:{h} Byexe           {a}│
-│\033[1;35m   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  {h}ꫝ{p} Release Date {m}:{h} 25 Apr 2026     {a}│
-│\033[1;35m ⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  {h}ꫝ{p} Version      {m}: {"\033[101m" + h if not versi_valid else h}{V}{r if not versi_valid else ""}{a if not versi_valid else ""}        {a}   │
-│\033[1;35m ⠀ ⠀⠹⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀      {h}ꫝ{p} Users        {m}: {h}{user}{jarak_user}{a}│
-│\033[1;35m⠀⠀⠀⠀⠘⠻⣿⣿⡿⠟⠀⠀⠀⠀⠀⠀ ⠀                {a}│
+│\033[1;35m ⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠈⠙⠛⠋⠀⠀   {h}ꫝ{p} Author       {m}:{h} Byexe              {a}│
+│\033[1;35m   ⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  {h}ꫝ{p} Release Date {m}:{h} 25 Apr 2026        {a}│
+│\033[1;35m ⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  {h}ꫝ{p} Version      {m}: {"\033[101m" + h if not versi_valid else h}{V}{r if not versi_valid else ""}{a if not versi_valid else ""}        {a}      │
+│\033[1;35m ⠀ ⠀⠹⣿⣿⣿⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀      {h}ꫝ{p} Users        {m}: {h}{user}{jarak_user}{a}│
+│\033[1;35m⠀⠀⠀⠀⠘⠻⣿⣿⡿⠟⠀⠀⠀⠀⠀⠀  ⠀                                          {a}│
 ╰─────────────────────────────────────────────────────────────╯""")
