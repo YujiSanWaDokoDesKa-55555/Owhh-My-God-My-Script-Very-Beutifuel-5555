@@ -10,15 +10,15 @@ R = \033[0m      # Reset
 TERMUX_PATH := /data/data/com.termux/files/usr/bin/bash
 
 detectCLI:
-	@echo "$(P)[$(H)?$(P)]$(R) Mengecek lingkungan$(M)...$(R)"
+	@printf "$(P)[$(H)?$(P)]$(R) Mengecek lingkungan$(M)...$(R)\n"
 	@if [ -f "$(TERMUX_PATH)" ]; then \
-		echo "$(P)[$(H)✓$(P)]$(R) Termux terdeteksi!"; \
+		printf "$(P)[$(H)✓$(P)]$(R) Termux terdeteksi!\n"; \
 		OS_TYPE="termux"; \
 	elif [ -f "/etc/debian_version" ]; then \
 		grep -qi ubuntu /etc/os-release && OS_TYPE="ubuntu" || OS_TYPE="debian"; \
-		echo "$(P)[$(H)✓$(P)]$(R) $$OS_TYPE terdeteksi!"; \
+		printf "$(P)[$(H)✓$(P)]$(R) $$OS_TYPE terdeteksi!\n"; \
 	else \
-		echo "$(P)[$(M)!$(P)]$(R) OS tidak didukung!"; \
+		printf "$(P)[$(M)!$(P)]$(R) OS tidak didukung!\n"; \
 		exit 1; \
 	fi; \
 	echo $$OS_TYPE > .os_type
