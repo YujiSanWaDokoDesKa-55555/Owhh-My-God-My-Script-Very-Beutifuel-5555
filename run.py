@@ -248,23 +248,10 @@ def main():
 
     check_update(script_dir)
 
-    print(f"{p}  [{h}>{p}] Menjalankan Script Utama")
-
-    main_pyc = os.path.join(
-        script_dir,
-        "Spammer.py"
-    )
-
-    if not os.path.exists(main_pyc):
-        print(
-            f"{p}  [{m}>{p}] File{h} Spammer.py {p}tidak ditemukan!"
-        )
-        sys.exit(1)
-
-    os.execv(
-        sys.executable,
-        [sys.executable, main_pyc]
-    )
+    print(f"""
+{p}  [{h}>{p}] Semua Package Sudah Terpenuhi
+{p}  [{h}>{p}] Silahkan ketik {h}make run {p}untuk menjalankan Tools
+""")
 
 
 if __name__ == "__main__":
