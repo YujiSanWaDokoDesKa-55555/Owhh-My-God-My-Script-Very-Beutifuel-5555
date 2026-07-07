@@ -28,9 +28,10 @@ export ac_cv_func_posix_spawn=no
 export ac_cv_func_posix_spawnp=no
 export PYTHON_CONFIGURE_OPTS="--disable-shared"
 pyenv install 3.13.5
-pyenv global 3.13
+
 
 echo "[>] python versi 3.13 sudah berhasil di install"
+echo "[>] jalankan perintah berikut : bash;pyenv global 3.13"
 # sleep 1
 # cat << EOF
 # ----------------------------------------
@@ -42,6 +43,3 @@ echo "[>] python versi 3.13 sudah berhasil di install"
 # pip install -r req.txt
 # just run
 # EOF
-
-
-
