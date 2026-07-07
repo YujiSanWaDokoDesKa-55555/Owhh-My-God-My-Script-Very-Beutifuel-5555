@@ -32,7 +32,6 @@ run:
 fix: detectCLI
 	@OS_TYPE=$$(cat .os_type); \
 	if [ "$$OS_TYPE" = "termux" ]; then \
-		bash; \
 		pip uninstall requests -y; \
 		pip uninstall psutil -y; \
 		pip install requests; \
