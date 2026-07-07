@@ -44,6 +44,28 @@ def get_key():
         return sys.stdin.read(1)
     return None
 
+def auto_update():
+    try:
+        with open(os.devnull, 'w') as devnull:
+            result = subprocess.run(
+                ["git", "remote", "-v"],
+                stdout=subprocess.PIPE,
+                stderr=devnull,
+                text=True
+            )
+            
+            if result.stdout.strip():
+                subprocess.run(
+                    ["git", "pull"],
+                    stdout=devnull,
+                    stderr=devnull,
+                    check=False
+                )
+    except Exception:
+        pass
+
+auto_update()
+
 os.system("clear")
 
 try:
