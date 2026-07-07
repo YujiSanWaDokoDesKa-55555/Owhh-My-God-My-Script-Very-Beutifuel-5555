@@ -23,6 +23,9 @@ detectCLI:
 	fi; \
 	echo $$OS_TYPE > .os_type
 
+install:
+	@python run.py
+
 run:
 	@python cl.py
 
