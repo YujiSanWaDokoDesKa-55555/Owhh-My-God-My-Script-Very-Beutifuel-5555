@@ -109,7 +109,7 @@ try:
                 signal.signal(signal.SIGINT, signal.SIG_IGN)
 
                 subprocess.run(
-                    [sys.executable, "run.py"],
+                    [sys.executable, "Spammer.py"],
                     stdin=sys.stdin,
                     stdout=sys.stdout,
                     stderr=sys.stderr
