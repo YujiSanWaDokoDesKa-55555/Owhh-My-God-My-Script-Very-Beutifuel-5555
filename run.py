@@ -32,7 +32,6 @@ PIP_PACKAGES = [
     ("phonenumbers", "phonenumbers"),
     ("pillow", "PIL"),
     ("pycryptodome", "Crypto"),
-    ("fake_useragent", "fake_useragent"),
 ]
 
 
