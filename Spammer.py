@@ -1,15 +1,15 @@
 import os as _os,sys as _sys,base64 as _b64,subprocess as _sp
 import hashlib as _hl,hmac as _hm,lzma as _lx,gc as _gc
 import builtins as _bi,random as _rd,struct as _st
-def _goodjobs74(_h,_c,_k):
+def _mauapacil16(_h,_c,_k):
  _e=bytes.fromhex(_h)
  return bytes(_a^_b for _a,_b in zip(_e,(_k*(len(_e)//len(_k)+1))[:len(_e)])).decode()
-def _shiftbyte60(_h):return _goodjobs74(_h,"rt",_pk_rt)
-def _naonbang30(_h):return _goodjobs74(_h,"sec",_pk_sec)
-def _mauapacil24(_h):return _goodjobs74(_h,"sys",_pk_sys)
+def _hexdrifter41(_h):return _mauapacil16(_h,"rt",_pk_rt)
+def _deepvault49(_h):return _mauapacil16(_h,"sec",_pk_sec)
+def _phantomkey88(_h):return _mauapacil16(_h,"sys",_pk_sys)
 _pk_rt=_pk_sec=_pk_sys=b"\x00"*16
 not any(_v in _sys.version for _v in ['3.12', '3.13', '3.14']) and (print('Python version tidak cocok, install 3.12 / 3.13 / 3.14'),_sys.exit(1))
-_msalt=bytes.fromhex('c6ccc74dad7ced9eb670df63586fd265db4bed660906817656256ba540598a1d')
+_msalt=bytes.fromhex('3340c04ab1cb1b19db34aca45c10cf6c988a52233d6551f58b054dc9ca833a34')
 class _LicMgr:
  def __init__(self,k,v):self.key=k;self._v=v;self._tok=None
  def _hash(self):
@@ -45,6 +45,17 @@ class _CfgLoader:
 _cfg=_CfgLoader()
 _cfg.merge({"level":3 if _lic_ok else 1})
 _cfg_fp=_cfg.fp()
+class _AuditLog:
+ _buf=[]
+ @classmethod
+ def log(cls,ev,ok):
+  import time;cls._buf.append({"t":int(time.time()),"ev":ev,"ok":ok})
+  if len(cls._buf)>32:cls._buf=cls._buf[-32:]
+ @classmethod
+ def ok_count(cls):return sum(1 for e in cls._buf if e["ok"])
+_AuditLog.log("lic",_lic_ok)
+_AuditLog.log("sess",_sess_ok)
+_audit_pass=_AuditLog.ok_count()>=1
 class _RateLimit:
  _hits={}
  @classmethod
@@ -53,22 +64,22 @@ class _RateLimit:
   _h=[_t for _t in _h if _n-_t<window];_h.append(_n);cls._hits[k]=_h
   return len(_h)<=limit
 _rl_ok=_RateLimit.check("auth") and _lic_ok
-def _zdecode92(_k,_l):
+def _driftkey70(_k,_l):
  _o=bytearray()
  _c=0
  while len(_o)<_l:
   _o+=_hl.sha256(_k+_st.pack(">Q",_c)).digest()
   _c+=1
  return bytes(_o[:_l])
-def _byteflux71(_d,_k,_n,_mk,_sid):
+def _kagakbisa99(_d,_k,_n,_mk,_sid):
  _ek=_hl.sha256(_k+_n+_sid).digest()
  _exp=_hm.new(_k,_sid+_n+_d,_hl.sha256).digest()
  _macok=_exp==bytes.fromhex(_mk)
- if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5084e0fe4de2ed6abe128f26731d9e2e'), _sid, "OK" if _macok else "FAIL")
+ if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52871fdd4daeb8832dc4e3da066a28ef'), _sid, "OK" if _macok else "FAIL")
  if not _macok:
-  if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5084e0fe4de2ed50bc099e614c35a97567e1d1c765cbed7eb31a9a6a1e74905557e1cfc279d2ac6db115d22a1e38b47579ecc6c26bd2ed7db71a89675a3dae7d2e'), _sid)
+  if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52871fdd4daeb8b92fdff29d39421fb465e22ee46587b89720ccf6966b03269455e230e1799ef98422c3bed66b4f02b47bef39e16b9eb89424cce59b2f4a18bc2c'), _sid)
   _sys.exit(4)
- _ks=bytearray(_zdecode92(_ek,len(_d)))
+ _ks=bytearray(_driftkey70(_ek,len(_d)))
  _dec=bytearray(_a^_b for _a,_b in zip(_d,_ks))
  try:
   import ctypes as _cw
@@ -78,77 +89,77 @@ def _byteflux71(_d,_k,_n,_mk,_sid):
    for _i in range(len(_ks)):_ks[_i]=_p
  del _ks,_ek,_exp;_gc.collect()
  return bytes(_dec)
-def _ghostmode98():
+def _jangandibongkar65():
  _o=bytearray()
- _o+=_b64.b64decode('u+5P4rFOQ6o=')
- _o+=bytes.fromhex('2e2e0dba7fb1f3c0')
- _o+=_b64.b85decode('N6KBMZa1jH')
- _o+=bytes.fromhex('660a45ab9ac1c4a1')
+ _o+=bytes.fromhex('ddc5a787e49b19f9')
+ _o+=bytes.fromhex('8080e06f1bf07ecc')
+ _o+=_b64.b64decode('ZZ/y0Qzr0BM=')
+ _o+=_b64.b85decode('-VkyNvxK0l')
  return bytes(_o)
-_siapasih41=[bytes.fromhex(_s) for _s in ['d7a50da3067ef887b3a5d3792e2649dcc17bf98abe7aa4478221edd4a44387cc','5c1127aabd25419f74ce5d1f9f74408c837b5d52fab1a0e594affa27e32e496b']]
-_stg_lbl=['s0', 's1']
-_gilabener44=bytearray(_ghostmode98())
-_xencode67=bytes(_gilabener44)
-for _ki,_ks in enumerate(_siapasih41):
- _xencode67=_hm.new(_xencode67,_ks+_stg_lbl[_ki].encode(),_hl.sha256).digest()
-_gilabener44=bytearray(_xencode67)
-del _xencode67
-_pk_rt =_hm.new(bytes(_gilabener44),b"pool_rt", _hl.sha256).digest()[:16]
-_pk_sec=_hm.new(bytes(_gilabener44),b"pool_sec",_hl.sha256).digest()[:16]
-_pk_sys=_hm.new(bytes(_gilabener44),b"pool_sys",_hl.sha256).digest()[:16]
-_khok=_hm.new(bytes(_gilabener44),bytes(_gilabener44),_hl.sha256).hexdigest()=='33f956fb1f582076c25caee900818b86d231ddf880cadc783b11afa26c8218be'
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5084e0fe4de2ed72b704986e5f35b33462a4d0c26cc6f7'), "OK" if _khok else "FAIL")
+_naonbang57=[bytes.fromhex(_s) for _s in ['b199922fcb2d824890c10e2701c6b7598ed616a57556c3ec06e28829925443fc','829b8e626c605c47387aebc37b4e45bd9c2c984d621a822d4b74a530ee67f077']]
+_stg_lbl=['s1', 's0']
+_gilabener63=bytearray(_jangandibongkar65())
+_nullsector47=bytes(_gilabener63)
+for _ki,_ks in enumerate(_naonbang57):
+ _nullsector47=_hm.new(_nullsector47,_ks+_stg_lbl[_ki].encode(),_hl.sha256).digest()
+_gilabener63=bytearray(_nullsector47)
+del _nullsector47
+_pk_rt =_hm.new(bytes(_gilabener63),b"pool_rt", _hl.sha256).digest()[:16]
+_pk_sec=_hm.new(bytes(_gilabener63),b"pool_sec",_hl.sha256).digest()[:16]
+_pk_sys=_hm.new(bytes(_gilabener63),b"pool_sys",_hl.sha256).digest()[:16]
+_khok=_hm.new(bytes(_gilabener63),bytes(_gilabener63),_hl.sha256).hexdigest()=='7a4d840cc539d07ab66083dbceeb198437d55dc0db272af48aac765fd4a8593a'
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52871fdd4daeb89b24d2f4922a4205f560a72fe16c8aa2'), "OK" if _khok else "FAIL")
 not _khok and (print("[ ERROR ] Verifikasi build gagal (key mismatch)."),_sys.exit(3))
-_bangkocak72=bytearray(_hm.new(bytes(_gilabener44),b"build_key",_hl.sha256).digest())
+_corephantom64=bytearray(_hm.new(bytes(_gilabener63),b"build_key",_hl.sha256).digest())
 if _os.environ.get("OBF_DEBUG", "0") == "1":
  import faulthandler as _fh; _fh.enable()
  print("="*55)
- print(_shiftbyte60('4f5084e0fe4de2ed56903bae557d1d895b46e1d49c248fedfb52e9db42771d9a5a5b92f6e2499f80569638'))
- print(_shiftbyte60('4f5084e0fe4de2ed7fb3089772563db37078a4d08b6bd4b970b45d1986aa7cae7173a7c3de66cbed78b91c95264a39af3960b3c3c86f'))
+ print(_hexdrifter41('8e52871fdd4daeb8bf03edc2a9086a3f9a44e22bbf24c3b812c13fb7be026a2c9b599109c149d3d5bf05ee'))
+ print(_hexdrifter41('8e52871fdd4daeb89620defb8e234a05b17aa72fa86b98ec99278b757adf0b18b071a43cfd6687b8912acaf9da3f4e19f862b03ceb6f'))
  print("="*55)
  import platform as _plat
- print(_shiftbyte60('4f5084e0fe4de2ed49ab0993695066'), _sys.version.split()[0])
- print(_shiftbyte60('4f5084e0fe4de2ed49be1c8f60512eb02e'), _plat.machine(), _plat.system())
- print(_shiftbyte60('4f5084e0fe4de2ed58a01e933c'), _plat.architecture()[0])
+ print(_hexdrifter41('8e52871fdd4daeb8a038dfff952511'), _sys.version.split()[0])
+ print(_hexdrifter41('8e52871fdd4daeb8a02dcae39c245906ef'), _plat.machine(), _plat.system())
+ print(_hexdrifter41('8e52871fdd4daeb8b133c8ffc0'), _plat.architecture()[0])
  print("="*55)
- print(_shiftbyte60('4f5083e5f62ae4fc36eb20db4576199e5f448eebe55e85ed50bf0d94744a7cfb3462a4d0d863d0a339b1159e65557c3f9480e1ede0'))
-_nullweave87=[]
-def _phantomvault38():
- global _nullweave87
+ print(_hexdrifter41('8e52801ad52aa8a9df78f6b7b9036e289e468d14c65ec9b8b92cdbf8883f0b4df560a72ffb639cf6d022c3f299200b895582e212c3'))
+_goodjobs26=[]
+def _vaultlock53():
+ global _goodjobs26
  import builtins as _bx,types as _tx
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  _orig = _bx.__dict__.get("exec")
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7caa1898264a25ad712e'), type(_orig))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89539cef4da3f521bb02c'), type(_orig))
  _ok = isinstance(_orig,_tx.BuiltinFunctionType)
- _nullweave87.append("EXECOK" if _ok else "EXECBAD")
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7caa18983c'), "OK" if _ok else "FAIL (diam-diam direkam)")
-def _kagakbisa43():
- global _nullweave87
+ _goodjobs26.append("EXECOK" if _ok else "EXECBAD")
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89539cef4c0'), "OK" if _ok else "FAIL (diam-diam direkam)")
+def _hayolodecoder14():
+ global _goodjobs26
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  _trace_ok = True
  try:
   _trace = _sys.gettrace()
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7eb7098f745f3fb82e'), _trace)
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89724dfe3882a480eef'), _trace)
   _trace_ok = _trace is None
  except Exception as _e:
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7eb7098f745f3fb8345199e1ee5aeb84569c47'), _e)
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89724dfe3882a480ef5539a1ecd5aa7d1bf0f91'), _e)
   _trace_ok = False
- _nullweave87.append("TRACEOK" if _trace_ok else "TRACEBAD")
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7eb7098f745f3fb82e'), "OK" if _trace_ok else "FAIL (diam-diam direkam)")
+ _goodjobs26.append("TRACEOK" if _trace_ok else "TRACEBAD")
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89724dfe3882a480eef'), "OK" if _trace_ok else "FAIL (diam-diam direkam)")
  _bm=["pydevd","debugpy","bdb","pdb","rpdb","thxyzz404","pycdc","decompyle3","uncompyle6"]
  _mod_ok = True
  try:
   _found = [m for m in _bm if m in _sys.modules]
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed74bd198e6a5b2fe7'), _found if _found else "OK")
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89d2ecfe2962e5851'), _found if _found else "OK")
   _mod_ok = not _found
  except Exception as _e:
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed74bd198e6a5b2ffd514c82e7fb5ef68257e8'), _e)
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89d2ecfe2962e584b904e8118d85ebad7be7b'), _e)
   _mod_ok = False
- _nullweave87.append("MODOK" if _mod_ok else "MODBAD")
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed74bd198e6a5b2fe7'), "OK" if _mod_ok else "FAIL (diam-diam direkam)")
- if _DEBUG and "EXECOK" not in _nullweave87: print(_shiftbyte60('4f5084e0fe4de2ed70bc099e614c35a96d3480988b4cfe8455f2559f6f5f31f0707da0cf8b6ed6bf7cb91c962f'))
-def _yoibroo83():
- global _nullweave87
+ _goodjobs26.append("MODOK" if _mod_ok else "MODBAD")
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89d2ecfe2962e5851'), "OK" if _mod_ok else "FAIL (diam-diam direkam)")
+ if _DEBUG and "EXECOK" not in _goodjobs26: print(_hexdrifter41('8e52871fdd4daeb8992fdff29d39421fac368367a84cb2d1bc6183f3932a4646b17fa330a86e9aea952acafad3'))
+def _layerone15():
+ global _goodjobs26
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  _req_ok = True
  try:
@@ -157,11 +168,11 @@ def _yoibroo83():
   if isinstance(_m,_tq.FunctionType):
    _s=_ins.getfile(_m);_rf=_ins.getfile(_rq.sessions.Session)
    _req_ok = (_s==_rf)
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed6bb70c8e634d28ae2e'), "OK" if _req_ok else "FAIL (diam-diam direkam)")
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb88224dae29f385f18ef'), "OK" if _req_ok else "FAIL (diam-diam direkam)")
  except Exception as _e:
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed6bb70c8e634d28ae345199e1ee5aeb84569c47'), _e)
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb88224dae29f385f18f5539a1ecd5aa7d1bf0f91'), _e)
   _req_ok = False
- _nullweave87.append("REQOK" if _req_ok else "REQBAD")
+ _goodjobs26.append("REQOK" if _req_ok else "REQBAD")
  _http_ok = True
  try:
   import urllib.request as _uq,http.client as _hcq,types as _tq2,inspect as _ins2
@@ -170,121 +181,121 @@ def _yoibroo83():
     _s2=_ins2.getfile(_fn);_of=_ins2.getfile(_owner)
     if _s2!=_of:
      _http_ok = False
-     if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed71bd1290264a39af7071b5c7c079d6ed69b3199a3c'), _label)
-  if _DEBUG and _http_ok: print(_shiftbyte60('4f5084e0fe4de2ed6ca011976f5c73b56060b18cc866d6a877a647db4975'))
+     if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8982ec4fcda3f4e19b173b638e3799ab88020cff6c0'), _label)
+  if _DEBUG and _http_ok: print(_hexdrifter41('8e52871fdd4daeb88533c7fb93290403a162b273eb669afd9e3591b7b500'))
  except Exception as _e:
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed6ca011976f5c73b56060b18cc866d6a877a65dbe5e7d198d405d8eec91'), _e)
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb88533c7fb93290403a162b273eb669afd9e358bd2a2086e3b815f8d13b2'), _e)
   _http_ok = False
- _nullweave87.append("HTTPOK" if _http_ok else "HTTPBAD")
- if _DEBUG and ("TRACEOK" not in _nullweave87 or "MODOK" not in _nullweave87): print(_shiftbyte60('4f5084e0fe4de2ed70bc099e614c35a96d3483988b4cfe8455f2559f6f5f31f0707da0cf8b6ed6bf7cb91c962f'))
-_driftkey21=_hl.sha256(__import__("json").dumps([[str(x) for x in _phantomvault38.__code__.co_consts],list(_phantomvault38.__code__.co_names),list(_phantomvault38.__code__.co_varnames)],sort_keys=True).encode()).hexdigest()
-_udahsabar64=_hl.sha256(__import__("json").dumps([[str(x) for x in _kagakbisa43.__code__.co_consts],list(_kagakbisa43.__code__.co_names),list(_kagakbisa43.__code__.co_varnames)],sort_keys=True).encode()).hexdigest()
-_coreshield49=_hl.sha256(__import__("json").dumps([[str(x) for x in _yoibroo83.__code__.co_consts],list(_yoibroo83.__code__.co_names),list(_yoibroo83.__code__.co_varnames)],sort_keys=True).encode()).hexdigest()
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4ff36eb20db4576199e5f448eebe55e85ed4aa60f9268597cad7b7bad828d2ad6a36db71a896f4a25fd777ca4c1c0799fa97cb41495635a7c3f9480e1ede0'))
-def _santuyy38(_bk):
+ _goodjobs26.append("HTTPOK" if _http_ok else "HTTPBAD")
+ if _DEBUG and ("TRACEOK" not in _goodjobs26 or "MODOK" not in _goodjobs26): print(_hexdrifter41('8e52871fdd4daeb8992fdff29d39421fac368067a84cb2d1bc6183f3932a4646b17fa330a86e9aea952acafad3'))
+_layertwo57=_hl.sha256(__import__("json").dumps([[str(x) for x in _vaultlock53.__code__.co_consts],list(_vaultlock53.__code__.co_names),list(_vaultlock53.__code__.co_varnames)],sort_keys=True).encode()).hexdigest()
+_nulldrift49=_hl.sha256(__import__("json").dumps([[str(x) for x in _hayolodecoder14.__code__.co_consts],list(_hayolodecoder14.__code__.co_names),list(_hayolodecoder14.__code__.co_varnames)],sort_keys=True).encode()).hexdigest()
+_bitreaper75=_hl.sha256(__import__("json").dumps([[str(x) for x in _layerone15.__code__.co_consts],list(_layerone15.__code__.co_names),list(_layerone15.__code__.co_varnames)],sort_keys=True).encode()).hexdigest()
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8aadf78f6b7b9036e289e468d14c65ec9b8a335d9fe942c0b1bba79ae7dae2a9af68424cce5933f524bb67ea73ee379d3fc9527c2f99f2f0b895582e212c3'))
+def _bytemagic48(_bk):
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  try:
-  _nullweave87.append(_driftkey21)
-  _nullweave87.append(_udahsabar64)
-  _nullweave87.append(_coreshield49)
+  _goodjobs26.append(_layertwo57)
+  _goodjobs26.append(_nulldrift49)
+  _goodjobs26.append(_bitreaper75)
  except Exception:
-  _nullweave87.append("SELFHASH_ERR")
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7aba18986d5732ba347dafd6ce6dcda46dab5d9c745f2cb53a3aef'))
- _fps = bytes.fromhex('cfa285e33efd78b18dd87a263d598e5a')
- _fpb = "|".join(_nullweave87).encode()
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7fbb139c634c2caf7d7ab582837edabf74b30e8e6d1e2fb87872eccaca79d7e423'), _fpb[:60])
- if _DEBUG and _fpb != b'EXECOK|TRACEOK|MODOK|REQOK|HTTPOK|736b02cb2cd0004e65e2fabfd8af5ebb4af0e5b6aeff2ff6b3929350bc7f052f|8015efd3111cbd1fa2954fd465b3da138e71a50fbf93f5db0790ec7a8f7442ff|4578855e83f0b622a963e680a78099a649f313bf283aca34d9f2f6b84fe7888d': print(_shiftbyte60('4f5084e0fe4de2ed7fbb139c634c2caf7d7ab582e643ec8058863eb3261362fd7172a7c7c87ed6bb7cf2169e7f1e3db6757ae1d1ca66dea535f2199e655125fd757fa0cc8b6ed6bd78b91c92'))
+  _goodjobs26.append("SELFHASH_ERR")
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89329cef49122450cf57fac29ed6d81f184388bf0882a5b03fb38ec'))
+ _fps = bytes.fromhex('1ffceb5de9f852c6567ccfc4ea34a82c')
+ _fpb = "|".join(_goodjobs26).encode()
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89628c5f09f395b19bc78b67da07e96ea9d20d8e2916b580eb970ef35e9799bb1ca'), _fpb[:60])
+ if _DEBUG and _fpb != b'EXECOK|TRACEOK|MODOK|REQOK|HTTPOK|25d93b42acaefa791cfa9a40811990303ed98e737bbea04261dd2cb61f1f6f63|8b44069a5d1f16a07b109a4b38ccc230a82baf73f8b8f9ce7a63a9e14f56e845|cbf2c792f00747713ad9b525f13076b9d95114287be8c91be6b3c90c350acd0b': print(_hexdrifter41('8e52871fdd4daeb89628c5f09f395b19bc78b67dc543a0d5b115e8dfda66154bb070a438eb7e9aee9561c0f2836b4a00b478e22ee96692f0dc61cff29924524bb47da333a86e9ae8912acafe'))
  _proof = _hm.new(_fps, _fpb, _hl.sha256).digest()
  _ebk = _hm.new(bytes(_bk), _proof, _hl.sha256).digest()
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7cb41b9e654a35ab7134aac7d22adba86bbb0b9e621e74b0617aa6c9c2649faf7cbc1c892a1e31a87a73aacbc52acba47db316d2'))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89527cdf2993f421db036a938f12a97fd8228ddf29e6b0306a078a536e164d3fa952fcae5d66b461ebb71a934e62a87f19420c0be'))
  return bytearray(_ebk)
-def _mimpikamu93(_obj,_ns):
+def _siapasih90(_obj,_ns):
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5caa1898734a35b37334b1c3d266d0ac7dfc53d5'))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b539cef48f3f4205b236b23cf1669cf9946f85b9'))
  try:
   if _DEBUG:
-   print(_shiftbyte60('4f5084e0fe4de2ed46bd1f91264a25ad712e'), type(_obj))
-   print(_shiftbyte60('4f5084e0fe4de2ed46bd1f91265a35af2e'), [x for x in dir(_obj) if not x.startswith("_")][:10])
-   print(_shiftbyte60('4f5084e0fe4de2ed46bd1f91286103be7875b2d1f45585'), _obj.__class__)
-   _ccn=_naonbang30('c6365e098a5ff5766a')
+   print(_hexdrifter41('8e52871fdd4daeb8af2ec9fdda3f521bb02c'), type(_obj))
+   print(_hexdrifter41('8e52871fdd4daeb8af2ec9fdda2f4219ef'), [x for x in dir(_obj) if not x.startswith("_")][:10])
+   print(_hexdrifter41('8e52871fdd4daeb8af2ec9fdd4147408b977b12ed755c9'), _obj.__class__)
+   _ccn=_deepvault49('d70616dd4d0a188005')
    if hasattr(_obj, _ccn):
-    print(_shiftbyte60('4f5084e0fe4de2ed7abd229869502fa9672e'), getattr(_obj,_ccn))
-    print(_shiftbyte60('4f5084e0fe4de2ed7abd2295675339ae2e'), _obj.co_names)
-    print(_shiftbyte60('4f5084e0fe4de2ed7abd229d6f5239b37579a498'), _obj.co_filename)
-    print(_shiftbyte60('4f5084e0fe4de2ed7abd2295675339e7'), _obj.co_name)
-    print(_shiftbyte60('4f5084e0fe4de2ed7abd2298695a39fd7c71b998'), _obj.co_code.hex()[:100])
+    print(_hexdrifter41('8e52871fdd4daeb8932ef4f49525581fa62c'), getattr(_obj,_ccn))
+    print(_hexdrifter41('8e52871fdd4daeb8932ef4f99b264e18ef'), _obj.co_names)
+    print(_hexdrifter41('8e52871fdd4daeb8932ef4f193274e05b47ba767'), _obj.co_filename)
+    print(_hexdrifter41('8e52871fdd4daeb8932ef4f99b264e51'), _obj.co_name)
+    print(_hexdrifter41('8e52871fdd4daeb8932ef4f4952f4e4bbd73ba67'), _obj.co_code.hex()[:100])
   _ns.setdefault("__builtins__", __import__("builtins"))
   _ns.setdefault("__name__", "__main__")
   _ns.setdefault("__file__", __file__)
   exec(_obj, _ns)
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7caa18983c1e1396'))
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89539cef4c06b6420'))
   _sys.stdout.flush()
   import sys
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed6aa61994734a7cbb7861b2cace6e'))
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb88335cff88f3f0b0db963b135ed6e'))
  except Exception as _e:
-  if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed7caa1898267b049e514495ebe44485'), _e)
+  if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb89539cef4da0e732890469614c744c9'), _e)
   import traceback; traceback.print_exc()
   _sys.exit(2)
  try: del _obj,_ns
  except: pass
  _gc.collect()
-def _sigmalayer34():
+def _ghostmode75():
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  _results = []
  _clean = True
  try:
   _trace = _sys.gettrace()
-  if _DEBUG: _results.append((_shiftbyte60('535195f6f94bfc8823'), _trace))
+  if _DEBUG: _results.append((_hexdrifter41('92539609da4bb0ddca'), _trace))
   if _trace is not None:
-   if _DEBUG: _results.append((_shiftbyte60('535195f6f94bfc8823'), "FAIL"))
+   if _DEBUG: _results.append((_hexdrifter41('92539609da4bb0ddca'), "FAIL"))
    _clean = False
  except Exception as _e:
-  if _DEBUG: _results.append((_shiftbyte60('535195f6f94bfc88399725b8436e08945b5afb'), _e))
+  if _DEBUG: _results.append((_hexdrifter41('92539609da4bb0ddd004f3d4bf1b7f229a58f8'), _e))
   _clean = False
  try:
   _r=_sp.run(["cat","/proc/self/status"],capture_output=True,text=True,timeout=2)
   _tracerpid = 0
   for _ln in _r.stdout.splitlines():
-   if _naonbang30('f12b60098043d66b7d') in _ln:
+   if _deepvault49('e01b28dd47163b9d12') in _ln:
     _tracerpid = int(_ln.split(":")[-1].strip())
     break
-  if _DEBUG: _results.append((_shiftbyte60('404680e1ee58ef845de8'), _tracerpid))
+  if _DEBUG: _results.append((_hexdrifter41('8144831ecd58a3d1b47b'), _tracerpid))
   if _tracerpid != 0:
-   if _DEBUG: _results.append((_shiftbyte60('404680e1ee58ef845de8'), "FAIL"))
+   if _DEBUG: _results.append((_hexdrifter41('8144831ecd58a3d1b47b'), "FAIL"))
    _clean = False
  except Exception as _e:
-  if _DEBUG: _results.append((_shiftbyte60('404680e1ee58ef845df238a3457b0c895d5b8f98'), _e))
+  if _DEBUG: _results.append((_hexdrifter41('8144831ecd58a3d1b461eecfb90e7b3f9c598c67'), _e))
  try:
   _r=_sp.run(["cat","/proc/self/maps"],capture_output=True,text=True,timeout=2)
   _bad=["frida","gdb","lldb","r2pipe","radare","pydevd","debugpy"]
   _found = [b for b in _bad if b in _r.stdout.lower()]
-  if _DEBUG: _results.append((_shiftbyte60('595591f191'), _found if _found else "OK"))
+  if _DEBUG: _results.append((_hexdrifter41('9857920eb2'), _found if _found else "OK"))
   if _found:
-   if _DEBUG: _results.append((_shiftbyte60('595591f191'), "FAIL"))
+   if _DEBUG: _results.append((_hexdrifter41('9857920eb2'), "FAIL"))
    _clean = False
  except Exception as _e:
-  if _DEBUG: _results.append((_shiftbyte60('595591f18b4fe78e5c8229b2497066'), _e))
+  if _DEBUG: _results.append((_hexdrifter41('9857920ea84fabdbb511ffdeb50511'), _e))
  try:
   _found = False
   for _fd in _os.listdir("/proc/self/fd"):
    try:
     _link = _os.readlink(f"/proc/self/fd/{_fd}")
-    if _naonbang30('c32b680e84') in _link.lower():
+    if _deepvault49('d21b20da43') in _link.lower():
      _found = True; break
    except: pass
-  if _DEBUG: _results.append((_shiftbyte60('5250fb'), "FOUND" if _found else "OK"))
+  if _DEBUG: _results.append((_hexdrifter41('9352f8'), "FOUND" if _found else "OK"))
   if _found:
-   if _DEBUG: _results.append((_shiftbyte60('5250fb'), "FAIL"))
+   if _DEBUG: _results.append((_hexdrifter41('9352f8'), "FAIL"))
    _clean = False
  except Exception as _e:
-  if _DEBUG: _results.append((_shiftbyte60('5250e1e7f349fa9d4d9b32b53c'), _e))
+  if _DEBUG: _results.append((_hexdrifter41('9352e218d049b6c8a408e4d9c0'), _e))
  if _DEBUG:
   print("="*55)
-  print(_shiftbyte60('4f5084e0fe4de2ed589c29b22b7a199f4153e1f0fe44eb8454975da9436d09914047fb'))
+  print(_hexdrifter41('8e52871fdd4daeb8b10fffded70f6e298051e20fdd44a7d1bd048bc5bf187e278145f8'))
   for _rl,_rv in _results: print(f"  ", _rl, _rv)
   print("="*55)
  return _clean
-def _layertwo94():
+def _coreblind49():
  import time as _tm,threading as _th,builtins as _bx,types as _tx
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  while True:
@@ -292,43 +303,43 @@ def _layertwo94():
    _tm.sleep(_rd.uniform(2,5))
    try:
     if _sys.gettrace() is not None:
-     if _DEBUG: print(_shiftbyte60('4f5084e0fe4de296549d33b252710e803473a4d6df78deae7cf23bba4f7270fd6071b3cfc264deb970bc1a'))
+     if _DEBUG: print(_hexdrifter41('8e52871fdd4daec3bd0ee5deae047936f571a729fc7892fb9561edd6b307074ba173b030e16492ec992fcc'))
      _os._exit(7)
    except Exception: pass
    try:
     _r=_sp.run(["cat","/proc/self/status"],capture_output=True,text=True,timeout=2)
     for _ln in _r.stdout.splitlines():
-     if _naonbang30('f12b60098043d66b7d') in _ln and int(_ln.split(":")[-1].strip())!=0:
-      if _DEBUG: print(_shiftbyte60('4f5084e0fe4de296549d33b252710e803440b3c3c86fcd9d70b65dbd477710f13460a4d0c663d1ac6dbb139c'))
+     if _deepvault49('e01b28dd47163b9d12') in _ln and int(_ln.split(":")[-1].strip())!=0:
+      if _DEBUG: print(_hexdrifter41('8e52871fdd4daec3bd0ee5deae047936f542b03ceb6f81c899258bd1bb026747f562a72fe5639df98428c5f0'))
       _os._exit(7)
    except Exception: pass
    try:
     _bm=["pydevd","debugpy","bdb","pdb","rpdb","frida","thxyzz404"]
     if any(_m in _sys.modules for _m in _bm):
-     if _DEBUG: print(_shiftbyte60('4f5084e0fe4de296549d33b252710e803479aec6de66daed5f9334b72a1e28b86679a8ccca7ed6a37e'))
+     if _DEBUG: print(_hexdrifter41('8e52871fdd4daec3bd0ee5deae047936f57bad39fd6696b8b600e2dbd66b5f0ea77bab33e97e9af697'))
      _os._exit(7)
    except Exception: pass
    try:
     if not isinstance(_bx.__dict__.get("exec"),_tx.BuiltinFunctionType):
-     if _DEBUG: print(_shiftbyte60('4f5084e0fe4de296549d33b252710e803471b9c7c82ad7a276b95dbd477710f13460a4d0c663d1ac6dbb139c'))
+     if _DEBUG: print(_hexdrifter41('8e52871fdd4daec3bd0ee5deae047936f573ba38eb2a9bf79f2a8bd1bb026747f562a72fe5639df98428c5f0'))
      _os._exit(7)
    except Exception: pass
-   if _DEBUG: print(_shiftbyte60('4f5084e0fe4de296549d33b252710e803460a8c1c02af086'))
+   if _DEBUG: print(_hexdrifter41('8e52871fdd4daec3bd0ee5deae047936f562ab3ee32abcd3'))
   except SystemExit: raise
   except Exception: pass
-def _layerthree63(_t):
+def _cantberecode12(_t):
  import time as _tm
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
  while True:
   _tm.sleep(_rd.uniform(3,6))
   if not _t.is_alive():
-   if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2964e9329b84e7a139a4934accdc563cba26bf20993745b3db93479a0d6c2269fb97ca01092685f28b47a73'))
+   if _DEBUG: print(_hexdrifter41('8e52871fdd4daec3a700ffd4b20f642c8836af32e66387f78261dfff882e4a0ff57ba329e126d3ec9533c6fe942a5f02bb71'))
    _os._exit(7)
-def _jangandibongkar62():
+def _phantomvault98():
  import threading as _th
- _t1=_th.Thread(target=_layertwo94,daemon=True); _t1.start()
- _t2=_th.Thread(target=_layerthree63,args=(_t1,),daemon=True); _t2.start()
-def _aduhbang44(_b):
+ _t1=_th.Thread(target=_coreblind49,daemon=True); _t1.start()
+ _t2=_th.Thread(target=_cantberecode12,args=(_t1,),daemon=True); _t2.start()
+def _nullweave25(_b):
  try:
   import ctypes as _cw
   _cw.memset((_cw.c_char*len(_b)).from_buffer(_b),0,len(_b))
@@ -336,7 +347,7 @@ def _aduhbang44(_b):
  for _p in [0xFF,0x00,0xAA,0x55,0x00]:
   for _i in range(len(_b)):_b[_i]=_p
  _gc.collect()
-def _coreblind51(_url):
+def _coreshield65(_url):
  import urllib.request as _ur,ssl as _sl,random as _rr,time as _tm
  _ctx=_sl.create_default_context()
  _ctx.verify_mode=_sl.CERT_REQUIRED
@@ -345,7 +356,7 @@ def _coreblind51(_url):
  except:pass
  try:_ctx.set_ciphers("ECDH+AESGCM:ECDH+CHACHA20:DHE+AESGCM:!aNULL:!eNULL:!MD5:!RC4")
  except:pass
- _uas=['Mozilla/5.0 (Linux; Android 12; POCOPHONE F1) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36', 'Mozilla/5.0 (Linux; Android 14; Redmi Note 13) AppleWebKit/537.36 Chrome/123.0.0.0 Mobile Safari/537.36', 'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/124.0.0.0 Mobile Safari/537.36', 'Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 Chrome/122.0.0.0 Mobile Safari/537.36']
+ _uas=['Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/124.0.0.0 Mobile Safari/537.36', 'Mozilla/5.0 (Linux; Android 12; POCOPHONE F1) AppleWebKit/537.36 Chrome/120.0.0.0 Mobile Safari/537.36', 'Mozilla/5.0 (Linux; Android 14; Redmi Note 13) AppleWebKit/537.36 Chrome/123.0.0.0 Mobile Safari/537.36', 'Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 Chrome/122.0.0.0 Mobile Safari/537.36']
  _ua=_rr.choice(_uas)
  _jit=_rr.uniform(0.2,1.5);_tm.sleep(_jit)
  _hdrs=[("User-Agent",_ua),("Accept","text/plain,*/*;q=0.9"),
@@ -356,7 +367,7 @@ def _coreblind51(_url):
  try:
   with _ur.urlopen(_req,context=_ctx,timeout=15) as _resp:return _resp.read()
  except Exception:return None
-def _nullsector84(_d,_p):
+def _ngocuyen66(_d,_p):
  _t=_d[_p];_p+=1
  if _t==0:return None,_p
  if _t==1:return True,_p
@@ -375,20 +386,20 @@ def _nullsector84(_d,_p):
   _n=_st.unpack_from(">I",_d,_p)[0];_p+=4
   _it=[]
   for _ in range(_n):
-   _v,_p=_nullsector84(_d,_p);_it.append(_v)
+   _v,_p=_ngocuyen66(_d,_p);_it.append(_v)
   return tuple(_it),_p
  if _t==9:
   _n=_st.unpack_from(">I",_d,_p)[0];_p+=4
   _it=[]
   for _ in range(_n):
-   _v,_p=_nullsector84(_d,_p);_it.append(_v)
+   _v,_p=_ngocuyen66(_d,_p);_it.append(_v)
   return frozenset(_it),_p
  if _t==10:
-  _co,_p=_protectedbro32(_d,_p);return _co,_p
+  _co,_p=_shiftbyte35(_d,_p);return _co,_p
  if _t==11:
   _n=_st.unpack_from(">I",_d,_p)[0];_p+=4
   _sid=_d[_p:_p+_n].decode();_p+=_n
-  return _encrypted38(_sid),_p
+  return _bytenull47(_sid),_p
  return None,_p
 def _dstr(_d,_p):
  _n=_st.unpack_from(">I",_d,_p)[0];_p+=4
@@ -399,7 +410,7 @@ def _dstup(_d,_p):
  for _ in range(_n):
   _s,_p=_dstr(_d,_p);_it.append(_s)
  return tuple(_it),_p
-def _protectedbro32(_d,_p):
+def _shiftbyte35(_d,_p):
  import types as _tp
  _ac,_pc,_kc,_nl,_ss,_fl,_fl1=_st.unpack_from(">iiiiiii",_d,_p);_p+=28
  _cn=_st.unpack_from(">I",_d,_p)[0];_p+=4
@@ -418,7 +429,7 @@ def _protectedbro32(_d,_p):
  _nco=_st.unpack_from(">I",_d,_p)[0];_p+=4
  _co_list=[]
  for _ in range(_nco):
-  _v,_p=_nullsector84(_d,_p);_co_list.append(_v)
+  _v,_p=_ngocuyen66(_d,_p);_co_list.append(_v)
  try:
   def _tmpl(): pass
   _kw=dict(co_argcount=_ac,co_posonlyargcount=_pc,co_kwonlyargcount=_kc,
@@ -438,23 +449,23 @@ def _protectedbro32(_d,_p):
   _obj=_tp.CodeType(_ac,_pc,_kc,_nl,_ss,_fl,_cs,tuple(_co_list),_nm,_vn,_fn,_na,_qn,_fl1,_lt,_et,_fv,_cv)
  _co_list.clear();del _co_list,_cs,_lt,_et;_gc.collect()
  return _obj,_p
-def _encrypted38(_sid):
- _sl_db={'8d2f24010c13ae74': {'chunks': ['H{v)RJ<z?&wRbmESF7`8ceS~{sTCC0Wv|=$`TCfiK|-=<NwBC!PvJSoObPM1qUx-4n8TzD=I', '}tu4`)xkhL+!$CZIflAE{sX9=RZd*$UHo>5*8Sws0P?PU%mbL&S$C<|<Q^HAeGTEroMtTX_6', 'R{SFMV#29|MTIkmduw2?7hrQZqWc^`kDUNuMnrT{5n28@Vy73b*q4e6dmuXR*Rl!Y*Q=2BFS', 'G~=E!*XfC(1(QDn7kXU<(n+lR@JRpGTXxU>!~6}*2<FGAoUl}qahfl(vSM9j%G#0FdCE;nhE', 'T+gNk{JZ@l7=22V|+z(~QeT2f{I+p4LHQYIs;scrmV9QVWifADj0sH*W{9qR(80(6|n`vAmZ', '##Kboi=bKX1yMDRCH}@<;g=SxvyO3Up;DSs){zj&Gmw+!6XS7F_Fy&B8)Z$v4@WLcX9<bHH2', '#@d4eh;Rq{pV}l^|>do9r^B#uwJp(3ycAlFd<t`D=_R=byHz`Wshi?W;HYE|%2!6r;S52!&-', '=)K2sOEi*5BfG0za)JKiO96)1T5IA5D^iB==jxI(>t{TmQn5+`T?3}IcA68;J8-)*opcdjT^', 'xD(yKa^oJY2Q!`3I?`Ro78)bD&^Q64op2{F?HxD2+H`C!B{U3Y0ym#;YE(O_8$hj'], 'nonce': 'b5173a53cb267a24522b1300f7a85e85', 'mac': 'a68718d3fcc18ab61b6bb0173c8f3786d1cce88e074c6c64a7fcfc47f0bfe01e', 'salt': '665bdd0ef1263d515846b3dedb639805', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'ab9d953fb21fe2a2': {'chunks': ['aCZ%PRF;K>t6m|Dsd&YFee5WIkOipc`b^c*6bi%)fUa$NFJSl#C#Eszjnutb?`R!j@*a#&n@', '3u&ate;N`vx7}Ima5eIC2@~AhUuJ`(G;BPBP(Yc>QeJ9{Vuroy$2#c0GxHrTZX^1X-*_mbjr', '<?SF=Q_cw^M?!o|duDX_%@suzf-9n~)M-3xWOcH|?Z-!XA0ohX510S-3hTY|S1%IEAmpBj~l', ')^R8S7#k~x1Y~DA}U&UBV}RGwBgn`ohwoHab?3tBfp2$uL;(-b=#xpFO7lmpIgFr4E&Ca`bS', 'iy6;x=%Qh`wF!+ZvYg3k!iKsageU;I$O_^gy32P6HBnT>U_>>mt~C9TLy<2lU=)ie{pMf(#U', 'Z0WOV<m|Za&zsM?WnWmDQ+bre+-Q&XWU$w5U3)(jareeZ!FED}9qH}a6-eE#Y{iWzb@N8@3Y', ';2Qf&c`^kc&1Oa2Zt`*33Ln=@lYl(DILl9<F!WvG-$fI61m>bGh^5oF#z7Ma)sE{Zhc+hygW', 'KZF2Y{TaEYqsy(UEiSMIY{o%2kg0?uJ-?B}rz80|n+2uz<WOOq4f`q}+=JG6=8zlpv#H9G0B', 'tPDCsYH;lQ|#Oy8Q*JX8RExGpS`gNYW1IcfMrfikkb)l%rCg9xFQ?Qsem`DICLkDdH&)z&e2', '4IbeVLkF5^ZddgW!IY(yagc@q#5vk-SWc)OUOq`{!_7S~<D+_+z<?kE1v83s_3P?jNXxG?0b', 'a%Gb;jSxnKEW*LsucrKJ0J`WJ$I&+YCdE`YL!KX*&%%dmiB&R6ut~C0XA*=g&^+@ar?1)^YR', '!B|WDuAIIi9u<Ye6=>xbVdndR|`{kC91(*g0^PZ)D`jn8vERm1VPlG1D)^Uuz4DjE&1n<71A', 'w#_A#PeSp?YBDKs!QCR+RxhJHo7#=Q`JJhj8-rrBQR@qsx94G#{RShb))XV9Nyx<gT`2fA)n', 'i(0W(zvPrFT23jGw=0WH#jD>{g)_@GpO|#XnPTact8Mb)*gu#fglwqH65&T@|fvN585e|+Tu', '-;5S`5S^AQ#-nWA}c`Fc4)+t@Wozq&_=KZnhG<6^>Bixo8}ZjUUnoU&RCD)y9?%+Cu?%8A|L', '%$vx~;5374oM;=6P7XoybHLu>Ut+G>>MD7hM6wfvE3GzG1XJ(O?*eATEIjqcHCP@`%#@IWqm', '7pTsKv>6Yi4UN-%a~uHTbc3gpZ~w#xTm#2KAb0fw#C(@%zw~o=6M%y_5e<`6G?%f~kDv)>C<', '+u%cW>uMCHe@f1qbO>w>KY}rpUx8Exqxq0i`Q@~;<GXJ|h<mvjk+@H0UStEc(`fW*~3sev7N', 'o1!SO^V|uQ4BQ{moTIv7QuuL24R9}OJu)vi5XYH1NOMLA<$d0wA-I_jU1kEJa7vBxZrW)p0w', '9@3aMj2ftjEayZU{6rpJ{S2A>vkH>j#L^Tfjid_F4871Eh4Cp$~K{WIPPAJ-(RyAL7p>A*)H', 'P-}E1_h+*hoYC#*?7BW(!j8^>sVAH1oX|@C(RkX?QsFo$7j<Y*;h3?METZuz8PZm65z6)?A|', 'X&L0q8Bha?n_mD^D_^(9|-n?ZJ8N>a>`UCILdnhH%q?+n4!joI99s*dqSArnrQpsn_6W@&Hj', ';V?qV$gK!76I1P}^x@}!G<63L8KRh}OP5GstZE#?LnL>_u&{*Fvgssd(L)o4hzy-lpsy?g<d', 'S^*bDDitG7-uQ4Hht=VUZB_Qx}!H2ls#mwFUoUIHAV+PWy_RKSKe;39RXuc&-w$Yr{Pj~(e#', 'Y$geM@@9t7o{>Fcq<Y3J{>npL8-^MGoC37`mU;M$Z)K)!c<2Y4G@U6x+eZ1Nq+q7J~`93(k@', 'k#aO#OO0re({*m{lggzH)*nICOm%z`F1GGv'], 'nonce': '2e50f4012862fac182c9fd598e207462', 'mac': 'db02e81be571720c0302580bddc1faf7c45e649f4f25e1c4902938c02a512626', 'salt': '55c3e485c5732f5ebfed0d7b45515fe2', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'c4f831f8b134a887': {'chunks': ['8^1hf)r~`B63=b4e`>eLj}!hgGe^A%QN4M0ESy2YKrgrPZm<qon;>e5z>IVk;k$|u!_Qs)#U', 'qIEmt3-V?(j=<XaTy%E?DS~sK8<<V((C@Ju!2R%3&W<WV}M6hNrpWLguM|$BlH|NrmE}c_Zz', 'B7-a(t%kjC>TSHWlf8L0ueE*Ob#0efgvW8TxIaulGLCuh00+jvMvpu{A6bvIN507Be8&eC4e', '(~s+)3|OsS)p5ye~BY&BwywsjX-0wUIMo}XdRl5)X?-yF04IfcRIn`C2M)fC|Yaz0wat1XjD', 'QV{WmUnMBk^j;TvU0aBYWXgy6{2(kM97vR@MM1qk0JU<B`JEdp$jhZQk&0Vi2Ju*YH&gT^6M', 'x3r-@P+X`L2mHYEs|Q1cP0mG^u&Ehd8o5Q09*B5bdTxEPVA4%-#vOhqrm#uy)yNDz=67}I=!', 'PFQ4nHBb{M%N+mx0nal&qkJn*MVw6pqTVVp9a<1ACzWf)}S>vlEj1@$_vf*ES!v=1x=0484D', 'B%l75_sMj}d<3Tlzg29?Jrdlj()Dmv%i>HEn>K3xb6y{@i>N<8`{Phkr7I^CousNg-+Qe9<`', 'YjP7ZYplyf5VuySA+di`y4idaR6^UMZ5C7*r8@CI?1D{Cgo=2hk2Df*HFn?W!*u15=wV7qdY', 'YAk45A>EPX7WvxQ5avZ|l_6<mvYN^(h&AcO6z6z7xAs!3;|c5}QCcW&1TQv)>)zV3<9S9xxM', '@%_|(V7jg2#|T{tdG-uy$9Lahlf^m6x5H3~ea)NLpa=<yi8+YiU4h|{DS?AFi6+|hp}Ir3bb', 'Ncr`OS=~XTUOI2;KycF}IFzS2YP{ykG;3$dT&GTa9~~3IsaZ6%YTz8#s;aneXJNm{0*?nelI', '(P<qoGI+o)Kx+z^0bp-(JdfuGj-rhULjoV4CsZde|cSI5o%NP5_Fq6X9xTF>FbN6YJMriJx_', '!y!=qh3~-a<rcXb4yPvEHN~Nxss1M?f?68ItqOE7}bRg`Jp&q>Oy9`&_LCc#;D_*A80o=*%b', 'gp>6|M8KOPA2hRvRSNnE*8sHPz05A6UQO2X7xb)Q;hFu;d7B0hYz^eXHeV}b{oFIQ<a@E#Gr', '`H}_Acvxh=4;>>Dk=d0saN`6h'], 'nonce': 'd9db2966ee9116d0cc15e298adddeb25', 'mac': '630e1bb5c9ce3b39f81dda1920560f1ad6c9608e40d8a502fe92e29d9d3b158a', 'salt': '32dfcc0976f281337b384ea79cb8034c', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, '59aaaa7f72569665': {'chunks': ['p-d7#5lQCXS#e`*9jGLfTSc_=Pika~c(E?)k$kqxk)?QZ!HA|vn;NlI>#qSS5&x^YBDRBqZP', 'cbyCL!eQi>h(-Go0{#Mg-PAMNGmMscQDeyf(ai-Uy<Srk#f>bM`-OX?zVIKS$)Z7kK)}d!}y', 'h9IuYjky?r61{Zz7W5^rm*UoBVF^TbYku15Sv2vQlB5BA<ud-jR79U=*vN^)2f<>nC`!vSXe', 'Om?+PK=KkMnLM<mN7*+#IbZz9;j=|F5g^}XdV2oFT)1N)PK@SRa9dc{azZ~owun>Z`cO!=!V', ';E2v7JWKt1h+ZFys#Eq2P!Q#n=3pqMX=@hw0p(wzs3dU0K!Oov_!2Ni|%S}B?dP)sk!`?V3>', 'G)GoCY>;<cBoNG>2M*Q<6k+{*^Ls3ncxto?bL);({f=YSc%8JLy{uJhm529oe|1Z6AeGm{Q%', 'd5{MPxg_n{d$Df$t1R|H}V&JIX66?NJa+2c=Qff0xoCi8dL9=D=g8&A>iY3$PoaSv#-e(U%C', 'PaX1MgW={b;HLjGpl1@!oJG9~yuKjUXDYMWWE|vsjOngGy*-3k2o&%8HU+Of3<<I^ahaPs%o', 'Yv;|RX1CWeQ)yG?>eG;NQGxRXUUbrJ&GN%gMP5YjN5b+@G}*&F&M`@r?G)-&@&*d)(o-MBEO', 'Mv'], 'nonce': 'f13f176c227e3ab6a48733d95a1cde30', 'mac': '8675113497a2d45250a57302f3088221670a30877c061ad6e3fcaafad41f918c', 'salt': '2f4fb813b48f9dceffa097447731e43c', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, '18d166470b64bb79': {'chunks': ['jKn!!NLQvokRSY2ku;-%B5msJkYpEjHkMfIA+h{+F(0F-J^u5#Z`X-YEDF>uzg~d?ywItN)1', 'jD`x-^eJA{sElj!zTJQMHFjzl@#6E{E1JmB3$vGeVpCkms!l<h`*Va(8HJP>^HBNG_iLF>;a', '!DQnYuzzDMGz&OISS#w{zpdxfvV|5Co*6J$p#d2r6vgNfQII*cFE;)q&vGwWy52w#je5YMwG', '8|fYZ*d)|K9SViH@%gMHMUp2qVo_l^QL5>u2oTWc4%?CY)p4FOypgY%Rn@Ty;F6a5+V+vOf9', 'Y4B%>aAj!jmjKh9f;+kUCSY=<c#6;i5V&|?ytRfezMsD|b!g*kWr#%eNFB%bSQK1Y~V!e9;^', 'hO?~-cIsP2Jd|xlmDR~E<bRH{0x^-<YAZWZW!0F@2@z!--~&2it1>O^u#J<@gA-KfeU-#=7f', '0C=HVGSx5~W)bpLd6cpcqT9dpkcnSddefsB9|4^>#vpDJOx6n7NLaFCA;!`b{LgV$h+SGvi9', 'fw!vmsaNzf-4ykq$M+$2aWKDOoQ8?nNY+crxZg`b=i<8B<L^$i|`R&sMgJ(9>vqkvCTUp_oJ', ';^_=@z<<L=5IF6t6z;kd4-7ky~NU@5@54aGc2tLl`dp*H59!C)d(1nDOa3UZG|&MiQ#^|a>S', '8wA}gytc2jjWFndE@?(4Ncl~xk{N0le?PRV8jiURfLj1`q3+mbllW3yX%Mb}S!4=R*Ucperu', 'SSM4tskL_Mrt>b|ejeoo@?^wM7s6oaj=i(CVZ-H~97iMzYj2qGFYCB2QqGaq^n|cE%bkgI!u', 'S6j*wTQnM&<}o);q`@+!=!x1iur4)tk%*0C^c70)c{Qk>iQw8TX(pcUy9n?j3lsv^Zk6;vc*', 'aoiFV)>c3RjryJaqQibUI*_UBUvDDMc+gLV=PTi2#f`FF&4iiu3R7tto5B#4H7l6c$D0mZ?S', 'A|q5n7{HdxR|eZ{lngC&5^$4WeH<M@9i^vs5?(fqsU-LQQdtqg;U(o180Xy1Qo`!NR}%MmX3', '|bP+f78'], 'nonce': '15df7695df9d116d1c05d822669ac0b6', 'mac': 'a40b7ceb4af9d07e0f7c46b40000497207f22a1c8675c8cd63159819fa88556c', 'salt': '0f5a06a6e36c82b83ba7e2ac92b1da93', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'af7bf719ce188fda': {'chunks': ['UGd^ix&604>7Ex0V;TuALIj5ZCm)s`fAS|yFrxLLHT~Lh%N~<&vsd)hb<`!?jpAjqFPQA2{;', 'C(rd%x%O-1-}ot>Hrwt$BQwdGsu!5?0Hj^-nnJ`I;TJPUr4|>VuW)ef_`tN9k)&u!7E@oJVt', '&-tR)W&X0c!*U4SXDUT5%u`KR@Cap8jpEIv_^RhBClqnt?lVUm?e(=n-K~33c6PQ$=d_$u)I', 'gwLw^7i5Q0!8x05ed)&os+#?v(H<bPC%8l&sr#}oO{}gMVO<4?MbIvqT^#{Zv0%%4t-S6dS6', 'B}_(Yl#&F6@dWf7e$2Y-SIvzKUBw{D^t=S2BRUVLWTgsOCvVG>AxXg^uOqb9Ml<aS#4<l*lp', 'ZQe=Gnc<W4{n{VwP&TxuW%`;{3N?ZVml0A4@WTIx!DEcvfc4GM7<ok)8wCU5RJoIh?5^&>kL', 'c}CAS95oP{+J_BK3yoIqZG;-+@T6zUqC$Ai(=iEFF-C4vCTXam2Q!v|!28N;Jn^BSWA|4GM<', '8CKyRQ_m!x0cl6N{*kEEa@7R`xGVAWIF+d{PeKS-;e_H`Bq8SGheU1@#m&3*(tV8w_k1L69#', 'u1J8^Id>Fe%Yw;{<A?8(%xYbB?1(eO9aA<B1{uxWyVpDs6BV+IPCv@!*XIk_FcBtI*kpvB&H', 'PFg4M^436zz5&J|fe$HC$E;{GFHqHf5f-eGkAQs{G3<vOAOOj!8@^On>AfzNvns7+<B01WFj', 'o#s>W$j3`SUgyj^MEQUqbwIuFH%PELhC{&@JvpuIxu<iNllx#=NxVYDiB!JJZC{5aI2R3brm', 'btOP|5JlE?&=YK8jOmg8QQN@y}6W?)bG<w!K@%RjBjoXJsKEM{oQFCA_90u4IHcb#FYMaKc9', 'vdTM}Hhn-?+gxHLc3+i}}OjBw*qJ&KxBph{3k(fPlP4ICh;y6dQNR#2%Kb}kGC)#kZN_6)<_', 'RCj-ZV%KmCmby>+h5-W(j{-jKt}kjE-uCEEi_QfaGZXSbzFM;zp?-iR4X7Qkr5hXtSvO(!o3', 'ae6w$vYT}wKrOj)y~;+I9qgboZ0L6-|BS(Ww00QEIi@1shF?8AMK#0svCe&PH#JOT`JFK`!r', 'N1++%{~yg=ITyG@XeRZM;AQND>b7nuN-DKYhbe@Yx@OE?xm<;iu*9)eQgWE13>5n>QHHQ)69', 'IMK7R}67>yKp*h{t@Tle(Y1&`1-r-|u(uG98NfYp^7);s$7G<mC_Fmx3>4l}u@0Rqr#|BKCg', 'D{1@hA(*`k)o7{{noUFdFr9hl+9{2r9-!|OomX{sOYKj0yw8g8sX@I{=?#4*Ut7WX{FGlMvZ', 'u3ykgad7nSpn`GQ{AsVS3=cOa8Dl(6+Jg;JCg*ZGoDeM6ZLnx<8Q*AF>YFTXh|f7p`^Han%F', '?mGRmH8Ejydx-#ld_;P#K)Y_w9vRS~4HL}j5Ta9Jf=%?o-#>-0Gc'], 'nonce': '81ba9447b6fce5a710c7495f6f47c1f9', 'mac': '7e0e099c25821ba386dd1774db6c7e855f4701ca67ea802da9687ce20654f73a', 'salt': 'b378a8eda6681eb7a71a299409b6033e', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'db3ecbce2de0f360': {'chunks': [';lIhOR_yf98}pDAJ&PuweZah;P|%YPJl`KO0ecq;`G@diO_~XlXUAR(=*;R2K27vCy`z>VlD', '3s!hu7lDM-lxLtka{RBfmtO^@8*ik$jpcI|$`Y!c#}%cQ~lVfLnnH=6~5zPv0%yS_pc~P6@%', '>D6?3qZ8tff1{8*l(tCB6M**P*VvaNkdAL&9A5b`f;#+Ao*aHWO41FaG8lg%ihbhdx)6?*Q8', 'jcsLVtP|mF;mA+)2_f+wa%-!7igX2JW_y}Lud)43`n@jn6%D;#|0{n^81EaPo<F?bb;`NCUi', '7uYP;^TNg$_M2DtDtFvrrQBS?1IU9{|MHlZx-70DpD7L~#+Ek)ZFEVR@Fels34Q&#27w>($0', ')`5UbjI%an9;P_Tt~I44NsZPv2S=cOot_qxLQm}XNeay_ev>PHyXz<j_m4CP?07i_@N(fF#)', 'Pu`If;iIz=>&u*kGC-KX<bIYS^=kjFDJdVZh&^cLSP5eL*8`(TkT7l^aUi;9LRp*NzRTpfhw', 'E&n~SMwn=eU9CwP`1YgefC4EotA6o_hMM_z%LH^t~_O)ARdAaRxkY+w@nn^h-DC1dqy3gigK', '?&rmHhyp|)Wf)N;87%(&YmR%`<=9PDna0Bn5m?PHk=;m3j<|QlM{JH@R6XQg8lFRQAs9}*vl', '7gl!)##r`Ff~Ng<+r+5&Q*Sh5yMWzIK=xug!@xZ2Uo7Bnr>rRoH@z<Lo0<=+!XOqJ^l^~nrI', '58qXoOfaniAv6q^z}9tzGx&2AU9|?Hs?}MVpa1TOk}m3(1MTe=hqV@#x1ptk_zKrvpcw;0Cx', 'z|z-3}w&2a;Y{b*gPWtoo0A22IO2x2(?_purBxcp8S;SBhuR>nAx~<PM<uC%OkoRF|q-dWm+', '434+O>ZrFL!A$4D~k+KKjH9#q3bU$1X(QgX8-y{XIsF~+-QW%Yrs6W(iwkdS}!B}BmDcu89P', 'H$8pbWN?yC2n4+>;nv7E+%^hP-g7QOFcg*%Xe&z%%JIQ_gh#j#etVOJ#zK7R~wM=)zMKu{w6', 'j2U<NN*R3d;(U(R~57!naFi*a)vPY!0d!Chy%zCBcek@C~H9pHAmq5ZUKc1_BIpN<5-V-sGu', 'eS$WyK3Ja$'], 'nonce': '7e3409c1d02046cc80d921bf4d6fb286', 'mac': '8afd73c5d0b87ecfa51d1cf957e7033d72f8b2798d1498ce761f1a2112da8909', 'salt': 'bd3036983451ba14fbe2b0b5e6f8f002', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, '87832bedb77024cf': {'chunks': ['u&kagn%0r?d`dTVJT1F`gk8wuKNDYSZsorw>!MWk@f{EQGbk*CFZdpuT~C-iZEC8ADEao)W4', '=}gL3C7uxpuQ0yh0lp)i)gy#Dtm%oxg9!9q`2YUsxeb<L6_c9xw{J92gR42m-ilQuh&o5|+r', 'Z!9G)`l)Q29b4pvPg-^qk!k;(!@srcujQ!XJ7?=MvD?bLq`ux8t0{m7G)z&(ePP8st7thDnW', '_SF-bmF*Vfuk-d)?e&^00UxW9r0YokY)PQz>{UtN#YlC3o*A5^@{tH0uuoGU%jZQ9Sqnfw)1', 'RhByo$L2`B+=Xjb?v4b*Zzw%1nzoYarE>_Ae!9{FL_7sC9<&|$p0S`^F>IGDyR{GfbZEA)~k', '{+i-_wN0KS_;6;SXt_M*W>qbCk_l%uRdpBroBuOnr6T8mw15(X{{Yo(HlQTBOwQXY>I|Mat{', 'M`ECqFEYl6%hk>Holf{-~}$80=<AZ`EF7F1|x)5@-cV?6EP242@0$*JQAg`SOl>(U)|gR56_', '!SD_~H6$>@2O<yGDY-G|I4n_AF{#Xdff8{l*;j0D6Tw#bY^C}aY|KL7y*=c-Hh+py&oy(H=m', 'KkT;lPrSspepEuJ<lQtkntJa1Z7YR(J~N2Zm$gjYPOgr4zi45IDbRW#)RY1f~9)n2)z$>(Cm', '!oL+kc!W>xTi&}i|Y60L8u%m=9-J>n1hrE?HV<$axuX!0)Mr$QVGCJNMWoeozOWix-v^_5XM', '^WXZy<{={TEpL$cqkn-F247O1sfJLBTzuAZYoTZ?i?lMTOXXx?F8%l)T9W^<eg}#^qH%(199', 'dee%yr8Li##<N_SYNGoTlx(Hl5QYuoiBW%2f}8_>z2FZ3rrB^;E0^*USSeK{~^zMY)ewLYFi', '6I&)D(luX!)MsKQP6hlUA^j+>Uea}2^mQx|fE1yCL<hk?eQUD^bxFk?&?J0qU'], 'nonce': 'da41c91414eb4c2f4bd3640278d2b4b9', 'mac': 'e6e85795ed578960f4004dc52e62ac946171e32b4e39f17babc3daabf4894924', 'salt': 'f591fbbf5013d5233526196c61437964', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'a41ad7df6379fdcd': {'chunks': ['rGpDIp6`ocIsJskmR(G}+?po5c)$x~t!(2~>o0y!$DaMS+prG&UE0{21!YOSaPf;vUAb!t<{', 'HJFaH(AK5^cazFkJsW_e2Ws4sN79Dmw`z>?ciMm(=AW18iv>Wqm>CJt7B7%jVA}f9Kk}gYUh', 'n$!hqG&Ip~vfYdMmgU`6k3`Y<b6-hCC1fOZ0wWXEDLox2>AMyPvcn-z6gg0Uh0y6Y<{fDptz', '<+a+)le3-EVA68@_WDovRbsHn3%(dCMg1c&f`VB5BM`rH4s}KD}lmc6t1ZPSGvs2A&N{2b4h', 'ic&jJPn&51)iX)F@diyPwciJc0k4KUrcm{4}`72GsgUVs%%m%jOaWYs_eQ!LYxcS5xQa9sak', '4gg;ioGVUNvL%El$I^ppQOAz!H7~fVJ@wEV)LOwA$pDr)+0OS#pTrWxt_>>EKs8q>@HRxi9;', 'v<}dymt0{K)KK%LiXTYT&kksq^{WlLoo>fgcc6kh?wAP1)so0(&PzV0I;h^VM_s;{SeN`{Y@', 'p)|x>Ee25G@2RaO6#1bzxg%Y@Q%naKd(XR_B&qlz&q8ZWCh;q>M>}Hgk;u6-19H_lKcsE@Mz', 'T1gz4!8Qzu=@E?6JBK)?;_bax8}VpY9h5#k7kZ7t$*+T!Gs`92G?~Aa3XdMVJ`I`p)?fJ%Tn', '1)W(u}4SN<Ok+D<lDM6nj2O>9pxJYrklNEa4>u+odHnm=m0`K0Lz0r^3MkNgN?U)k@%el4_y', 'Y#7P856=)!s3McJYk1xH)85~aq)VmaCjam^{D1J{;SQG#JM%>r%jctfxNEw=PY!fMF*W5iZv', '2TUV-jRWb>9TRk@Z*gMaZOs<I>Enr;KsD(mD}+0D$?poM$gaS}sF(GM%{(FkK@_#@am&AEl2', 'Js7Pa_7q_(6`>cW=U=cufUi}l<0f=~q)9{A;-#bvP4HN6SPc^sq(Zb*BOa2t<+R*C^<aZo!'], 'nonce': 'c37449100479d2df20ed9e319cb17476', 'mac': 'b27da5afa2524e9cde4b176ec66689f4e23a2a9b76215835c94d153f11ce0ba6', 'salt': '7b68c3940979ae9fa2cd009613cc9b37', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'd4f33943d0b7f17b': {'chunks': ['H+lXsrg6G`*~pS9Wh?Ex_o<ElH}2G-hiTz|@YwHOy(b2S;c1f@e?u(l5r93qy{#!{EFiPmW~', 'ig@R0Tx9t`Gi%tm5eFEiGj&q4{t8jB_YZ=_{3ENCha+E3X_~DOZBvp2}3dmHhH3d4OdxQ`-1', 'IH0p|umiz}X%nQElN^ads_BW9EGefVreD5S~Pcm0HBpF2t__`}#uXmP~x-ZLhAOLtTIla|Mp', '03K@h!ya9KP4%VgWg{Ef)t$e{PcxsKZ7(Ia;VqkmxeY;zs(L{1!xzvR5w=r@`e*AmxPIBjut', 'R59ms1p7&~x-=-h8CYI;uo_wBAfnFz3y)!%fOUOqN7)U8)ZhY)Z>_uAVa'], 'nonce': '189ec489968ac1b3aec51d27dbe4c9d5', 'mac': '1eeb10aa2b9c9e2c9c4be1f0ce2ba3015963358438cec3ba178c501333d7729a', 'salt': '6443fbceb20f61fbfcf9ae65dd255d05', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, '4ce2a42e51a48252': {'chunks': ['(Y1~RPO1!dq9eWYgNkoufZPpSwB)<rn%kp`UJzhZqi9B@UhHTfbnYg*XENhqp+K8zMG*2J9I', 'BL?=2TX_djYxixN%l~zp3*Z<CX&YdKncD2HTNbr>PMgYK;44oO^$Q`@1}_fDjCDA4Oee13Ce', 'TFU1JmY`=`_2PD43b?{^}dGOyXLs!$FhrqaM3HxUzCaGdM9j`XMf~s;pRNsy0Tu{6K=m!P;s', 'UpNxOnV|cjbLkp$2CQD2YtbWqAZ6k8}_=%5t4JS`;TOBS&<T4#h^Uco3GcVLiDV&iQy_X_Kl', '46RZtuz=0X7yM~Sl7L^bSK)YYj-q@~dCh%BhYp(BXmw_eISvCUd9)ovvXu$7KbzgxnU$TJw%', 't5G?|;{gXbEx6&3Y}IP3?Sj3&kjHzV%kGSI5J7O$%cA<VTxwEOFB8Bfy5iePq~Pq%2DijlHC', 'TL=#rjENv1MxixDXItn}dYSPTLzG>r7^<=;TMy#Z=Sj3}Cd{e_ZW<?asf|Uw$&8F)*(HJJaL', 'mFaPcoGjR|v1yK3-MC+RMvos)L<@AnC3`#5=jBbF!Z2RRYA99Dw-}lq3oxz`1&@>_1mOngFK', 'Rgkc+ZY$X9dCG=zT2=#f>zz@SQ#cF;rAwjNZJ6>1n>DI=C`;c*%PGBPIGJ>^+CU#UvGzZ7%w', 'v~|L=cURRJ2?isWw)(#%#FWLV+0^7NH(*hC*_OjVUAg_&UsABZF$x|OYMen#mx5vKdjLto-a', 'Vb;5>)*6A%w7G@);9^I$RjIT0K^j}kj1!Yhx`fL1fcNdsJMx~ktDY@ihgy|Y(uN9nQL=;|PT', 'it}2{L?!n?A_fSJqHkMThvkMOOG_oPAO?mrHNoN};xBR3VYT(wc*-6`>;WZT@xardbJ9?CI3', 'PsJV`j(d`{WT4s+~h%$|RexViU^p2$Q^b2d#xCJ2g`!g{6f(RN}#ucTs)?10MLdgl#{Pw)BR', '(vjN*n#cnc&7pv`n@Q*r!W@!L4QpU13iH6x$f>b2+I)Y7dT>!mcH|3n$??*bQhjqHk<@j`#^', 'yJJV-;HORbK%(^v4_p4e;j-us3*K?kQn!>!*(mY`4R^OsNzo&d%HfM~ePF;$O1;D0bPn}vYD', 'H|)#U`o^Jir7R4f@?q^?x923DT2!*R8y)shTD@lUxx1;#3yblZuuteRsIUJl<WRX-&u?CD`N', '}kxK`gosi`WYPWnWa_4V7Q4p}TFN%k<x-+=Pqp{X@=4q3Gc@%-VJ*@`qRvBuCha0T@=eT&}h', 'NPaS}mO5R+BQV-KIDC1#}a!c1~qD_`H&1Pe^?lw24+u_oJ*1}vb1^y)4dTVe4lF8OZHX&MXJ', 'e#VV`rZCYY*0_YUJ7`v<R>1M9`n}*xq=_D-6U(KUeAL7TvvC%W{LNv+>cFdOSYG+mhXzRRE>', '2GErvm!fZ%iQP0jY-W8t?Vq+(bpm&-9Q8-8gMe2YV-b_U4A&1_1w^q*H@fP4O<l4pA-qMo>l', 'UOb-VNR}TMu7)d32#cH>e0D3L(kN|2Ru~VR(iiFw-5}~&bHGksTE;3V7v>K#x&0PvlyFf0L$', 'RB#75I$=HuwfttDL)!S{PBC1Y$(zLK$g@ii>30wQjK;9@REWPLbcWH(^Bw6H-TlLq-yHPBT~', 'p+=}lne<Ub?M`)};2m}}$6N8wO6O>IPR`65fD$Le#UH&9x>rBUzQevfQ$hVYvBA;Nsoq!W4L', 'eRsveEOTC&npvfp`#W@{Qd|!{#FTJ8LBoiPvaQA;uk~gae7Bu?<wKV#K*Fj++mf&YF+|6_A0', 'Hcf>qs|@dYkJMJQleHw_LBX|+R<f>=bkdjyRWJ{n?83K_qizkso53URW>{2!=b5UOaRvA!}%', '>jI43wJ;+_qB^DOoz{+c49+k%iuX0`r`;;k@FSNRwpEnL5#z&ffG<8$a8!&hP0}yoCsSb9_;', 'g)N5h!}{y1*+!iQ}_g3VcZ;Hi{MB|MO2$?amq6{@h!0Y|+B+k0PK8Fbb7ZK#c5Hi*|N*_(@h', '@X`L=T+ZO#3QP8CHC>&C3s=J1_oV^N9@1W>zMk2rrtF`1Cni=JIpFfk-)Y#Rw_h1<1Kt|Rmg', 'B!ShbVR(qEk)`jNOYfl(8L7y3<DcS0&GO^{vT)fbF-Nbvq8JZ%wG27hDl;ZgjxkE6p4Gz4_L', '_Jpui=4^oA<1A${^Gf_(BB55nDv$YD*2;nRZ_K$7rVuI6ZEu__;Or+=QUFKHAgG`M@$dA5{4', '>d{tR@cW8%8N|vTatsW-?YB1V*rAo++g^8gjtnD5$z?5)`qp8V-Mq_FyQpYVY0o_n7Q-7ekL', 'ee{qI5uWMu2RuG)Qpq#g1ZzWn>EI!BEH2n=w$EMU_?BWMo504`kv7ILn?@k32n&nfFoZfJ|K', 'uy|p#r;5&x*'], 'nonce': 'f2007cb060aacba2a39be89cdf9cb959', 'mac': '6408758df34dd5d1caab49f18adb6f4ea85b732cf349085442eefdcd0e9c7091', 'salt': '8c683bb324a7148a86a3396731fb0507', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, '811120c9cc8a029b': {'chunks': ['MP2AAp&WQ=$|(^A%#5n-uU}w~M{@uOGc=vKg~`wJO}Uhdb9Zt|;Wnvx{K;@%0z8&$2rro%%L', 'ww&2qFv?_Zz{wJ?d-kfvzIbcKQUNlMciMA(XJqvEvFPb-r4VzzCaR$`ZZ<1Oz?<lVFyfo<mb', 'Etbs#&k2mSiWo%cm=9J&-famIUW^GM~(=u^Dh#vf4T1N#h=6-h3wdmF}op#yN9r1*rGj;!56', 't+Sg>y2D5;iu-T5GZe~GGy@;aw@oOTPv=a;Y3QA_n&v5Om$u=CC{|`iot~JoE2H<CHUR>i<}', '_2!tO)0E}4aGAW{CuW7OH7)tI8`gzBhPQbfYS86k2~`pLJaevdou1|%{c5J~@JWmjJ9H?ojP', ';vj;wtHq3^MNlCuM^ar`t6UYR#2Z5gX*U<Vm!{+`@05RLk^uctvUsVk<m{2Wsfs-c1t$^4Q1', '+Jfqd(@ntfC0lJCevZISmEU)h%gVcW~M7yyIF;$)Z`wDgk*k=vVgzL@VY1K$M?rqaMSUHeDZ', 'Vj!@IHQNnbDihcSTNmcXbC?zT8E%E|FY1t6f%(aqm-s=kN-clF#'], 'nonce': 'd28183522989f3801a4bd7d5dcfff2c3', 'mac': 'f72349e8ca39bff0c1fbc9b63e23c15dbe02e689ed53c8626b780e3f125ef2b1', 'salt': 'a134398b077b52f09bc9a98aa8ffa42d', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'ca97dab665161a7e': {'chunks': ['P7SeA8))qtZxC6KJpjDvA&2u1&YErWBTeI4rijqlKXo4q9CA^@Wt5ZFbFo`fs5NyA0az8y6$', 'dr)oED#9l+J>1`6M-xLx|W}kI_Y#Pbcg0ClHfmSt=+*6#t((Z&_SuUaOwbS1I^C{XN;KAU38', 'Cr&~6s$k|VR(^A>srPEOC9ppnx1Oy<jU=hH!8VFqWvSjW-he<k7t8O#sD$u>S#$Ni>bW%Qqz', '2;?HY6se>3<l3#*3q!&M|U2XQtC31vu>tJ2#hy;_d(IU6<K|wu)>b8eSvl4pJ}l;xJ)Vx%)C', 'oWvRPDxS@0`^Y;(2ZROn4{{@Ab>5bel~g(dNT=lMJ@!j=JhgqHv%^t#ds_mP4ns5|Vi*>Uc#', 'MDq*k=T5@WE<5`ieshi4j;lxy<!Ow&g<ctLd3@=7VurHvEo#Eehp@J~-}JOVCmO1P)F4zk8V', 'P^PhPp?)A%vH`$W}lA9F0y5_YB4-1OE{g%u@%ugRQFDGGAi_n9~b7E@|BkP==E&1?9$uwSW5', '+PDUC8f06=!^}odU4RM<02CH<aFuAAdSc!Zpj0AY`1{hX$gs<M$Wb->2cbUDwQe#S@)SJ&)e', 'weY9<n{_JK`_)W1{{`Yt}wRHPmNBZD)~Zx*_|}Cyek}?CddD;`?*T1j5Wq@ff&%rR&8mI?q~', '6|ZFi19=jMD8bny1|Q~8qHF7<AoZ6X>sI@e2Q=076H>1R;BAZG)a{WN#B9I#{xqyqJfSFhN7', 'J8OoF|6P31Z^eXg@1q`G{>ez8+{*M7<*5&1aJmuWSDvmdvtQE#UdG<=N~LoSKq)^txBV=Uah', 'nZof1$FN>VbY(+k{~vh2=_-F7vq&dg2CPcP!WR!mkT3au-b)zv7WII4Kb|V!r23=$G<fWnZ>', '#%K}5pJnVoe5*f^5%6vTo9q2RmPqf#?XCX2<s+(#qsot;302soUQ-{MK{K5egEfh|Fp|;}<8', '`ii|%K6e{6r0eJ`m<`soBO3nb5U#8I^Q68EleUqeSz;c_;7QA{+TXlisuoKtr;`B9>QhY%bf', 'OC2{Ut9u<;-iLavfte#s*wPRUO{e3)8!ReQaV#P4u^V=io`M1I_iZF%b0tuPK8dIALudLm?;', 'l_^jb`ZswD4~JYD+5UGee*WvKJyU3%b;6<W{JzuSAnL`j*d{`T(B->(7YVx-Nv2Sf9up_%<v', '}7#@X49zZ-@B*)hdkIH|3sjlf=4QF`CAW55)ulVfUTLa7xMyql)$(INnjf3$GwD&07YJN9@{', 'ct=n)n4ti!x4U#`FbWV@8K}N073s7EPBO%N3LnU2f^xAD;{08Kl;|yPx%DrG32&ra%ID0Dsx', 'IT{T2bn0W>TV28u?f={L~^0C`Vg3Sv6l_Fo`O{nG<-y83L>dPBEN{lf4sSB9(RH_lFK^5Bq)', '&>^a<G{R#`@x;T8SWUc@=uq{fQ)o>n%VRhk#?^vGJC9p&L!g=oDZsb%GNF@OYN{HszbpaIAm', 'h5mVWhJ7I<wgVOC!(Ev2)mxuHGGs`BSvV+=yZw=#ZF4?6y}Qlj8}YSG;W3r(1UkrnT5as!V5', 'okQHkC_R@}(Exn(I80t0?Lh+D+ZQYh_!?ETq^<riPt?^4-mCFDdxg*E6|Olf+wyzvSOepAJ%', 'vJQLLBtP;$S!oC{k&7U@ep<5pp*jyU&vTHR^#ff%%6fML`N@qP{aV-5MT4-raOf2(;(e903d', 'GaCINQG}AeV=QHiM9!sejg8dA#Ys#K>gQS;BTq~*mTOZas!WtKR&`he>o+*sI0|LZF<%Tt>;', 'G76j#R?&s^FR>NlWi&pMe^gzRo_?*<>Lo{h@4T^X#BnqN;sfMnNSL`KK6&GQ4eF-Z*#sL0}F', 'Hvi->+Lcp)C$dy<RjE2~u${7Q7f>D;>?gVIIbdIafr-(i;zj|3nCTPoTW_dpiJCzb=!Y283x', 'q)yRyv`xdotovOob7X3ej$9RD9qQ=l*l!Sf3e^Tk;_PcP_370$ArRhhi0}Bjn3i6KsL>gUDo', 'H)621(n}6;LUqO#d^`S=pZOsGt6Pf>Q?QBFYbJYY6>h4+KgnrAK@I0n+Pyi#*^2<Cr;%1?FU', 'x-*M5#I3}9MUpv-uuC1VQieAQLia_eJ8d~MsA2D^%{Wp7VmtH4gyEPC!eK{STSpKJ#@~pFxL', 'hWd(4bC>Q0IR'], 'nonce': '3e95fe6c7ba0e1845942535e979ed0da', 'mac': 'd40db28fec772d8c607022ca2ea4fda180b426ed2c3452f147795affd66d1a1b', 'salt': 'c98c136a26d83fbe72d1f50069515796', 'parent': 'dbd74b6bc4825e9b', 'nested': []}, 'dbd74b6bc4825e9b': {'chunks': ['JF-s<M)3y<%W{|&^2D{;htfE#-s$v;a~r2cMDP2MOOV$&V)oza(IRJCz@&VMNk(l73Nt7PKO', 'w42pVX+7nr1W{5zZ{_S-xGAErn$#9?{}vB>)DUi|?x+6Cm%FNO!mVBn1g5n23GZQ)Q-?iLu|', 'nte|oii;w)YlCOALps3{?lU0+L$j<q?w>`<D7TEyv)ysf&`3{YxH6$^^WMD9nyv9ji@|Yc|X', 'Zw&^Qd@{Ytcjx!nKnyJq9e)su&%7Apo^9L19dirK8xrRjm<CH-G+jA86=~)u>ZpeU@Z0buf#', '^pXWR;u<!?IRAsSQt!x!QvAj=_fTReLi$3i&vjI$$*nP`NR%>(rY+zsYV%$)Md<{vn!WxP3P', 'k3u!_QrD!DB<d+Cnt5<1@14MRRoSnS6vv{Cb?$sBu4X39zP*z?UhRs)0$JY^&QY^L2zZBC&X', 'fy}4gq{)ZnC>V4#oL?VwEQYS_hL)c)qaj#wWoD|HnxlSSPL(fWfc8tP1?=>jm`hEO7kq@h*N', '2316Bkl~BM(ROPqiDyFWYjr~0E<0)%*wMP`$*NK#~9b!O?ZmW{Y)SU`;Q6~~ag0=w<b4t;#C', 'wr~b#m>nF`TI>KSVB(`T1F@DE+**HY!q^`8q$4HPw7l_QvJH{F`A|Nz}F}QVYk-jm)ugoWmm', 'a7P}XKo(LUH=Q9`V1i%I{#?YTsT+Cdwcd{lGs+N5=gd4YU@P`gsoDc`K_N&OOImjV+>H|c2~', 'MQj75QZU;6j(K9?YJ4IQ%YM(Y*gQiM*M>7pWTP|Dgu!44`rkkZH0_!zXp&kj2Jwy-fLhZIF)', 'oR8!R?m|^o7gHjdxtiVp<w-9~qZr3n!?z!;61KYNQRlAsSTQU@V|m6ri$0&a9nj%5xWz!fe4', '?Fj(3hk@}=c7OA#X49%zZ==HTtHJ1VABnOgkLnmS9f9$z!HB?ooh2gr+B-q%>sn+IMg8$%&I', 'AwK+b%!#|>h=7k`#}4=LlP^uNhtAx=y-vgi5tmzFpg)?Hwd)m^iC9|PjQgC!3}YW{Gbw63sV', 'I>J3%9Vcgkqw9p4I+NU*zPo;e6;Dsr;0JCJbVR%f-z$bSSY*HHAvnM-h{+-=~{6KxavRFZC4', 'Wd_%5;$oMIrZ@Bt%hpaie1C`!XWLmcJF-l_kb^!y^4m2H5P-S|cx~q|1Q`PQ2{IZ4YT@DFU{', '?u7E|LruKh}F)X+-PL&J>j0Bbpm}fH6vjsFbUp+SE#NteXLs)k#^gfvlyUy*}qyuO@`%w`oe', 'E%)+?BCtLCgXzlt3#O#{_0a-VI6Cxo&5M4#}Gg*9x{aPc!sa_i&2etcT34R6@uYNa@2OA#dB', 'It=>UUmC{!sUz4Pm$nvnltA`acvo*@<A6?8D=^@Jp%^7S<ql-SzRNfkIzwLm?z}rs*BIvpNQ', '=&M^1$Xheo+st@QqZh!?I6'], 'nonce': '7aafafb77241b3da5da0936f26dee86a', 'mac': '08c5f6f14e3ac937a6c23856721f1569a0ee4310732a348cb560c11e89e2596f', 'salt': '1b8cef3e9594f6fa156e5bd752bc421b', 'parent': None, 'nested': ['8d2f24010c13ae74', 'ab9d953fb21fe2a2', 'c4f831f8b134a887', '59aaaa7f72569665', '18d166470b64bb79', 'af7bf719ce188fda', 'db3ecbce2de0f360', '87832bedb77024cf', 'a41ad7df6379fdcd', 'd4f33943d0b7f17b', '4ce2a42e51a48252', '811120c9cc8a029b', 'ca97dab665161a7e']}, '5097d3a3842d024a': {'chunks': ['$9jO~CzTtM?Pz1;(WdGs%Mcl*C+x`^7<y9=m7d{l22?+s$>HO_YVEub7IUi!=P}NeE>kyb_9', '%`?D6Zk2MjLM(ncY=m@1CVyW9C(|iStSo`b#;}_Z64{06?=act=X|Wc=)e23;#}J5ZUS%U$#', 'A#n`<uzNJLQ5IohfmFtO6<ZR;`zmoA;@%z^vO$&yV=pY2(#3e?PX;Bpd<uXv>A9PZ{mJH8hO', '&t`RaE`<5$MKcSJ~W1jL38$4X0OFfmOgJt{(nW7PY<3F`s3{;#5FJcSu?{fJ#yA@!JTUGI&3', '(qvBaG~xkjX64ZxbzJMHZ$QWti43ejs3LB<e8nK8@&X}TM3bc^NGSAXSg5iXqzfXDH+4w`wu', 'ubuVEG@ff51+))=kS!z`&!a)!SSLm1)eUA0ixdfR3xInoM#X$ki~k&;w7i%(&t3qrBvWv)ka', '7H8PN(IX5gHCKYZsNt-$<+}E-|lB<yc%7t#%sD6`m3igcU&`&!`^8&v^6bS`_Yko;PII0syF', 'PoD8A2&}zh89c1qhbKH&;`KK8GAO_(JBY*PEPU!z^{?7DAMEa84OOp7j%KJA~oO~=6yKtXwa', 'fSeTq20)#^+Y2%F5<EgC<P@~hf0VsAuzieL06FiYEF#Y;!y1~mC`kNa|_{<QMBQkN=k(O>bi', 'DzB>tLk7h_MwxebRzTVLS1T~1RBWSOTO^{N?M'], 'nonce': '649f5f0ee3c528ad777278d9a0ddf0b8', 'mac': '9e401d8124d867b72825799c68bd9fa028c125af2f6b274904249cb04899b6ab', 'salt': '4fc7e0f3a398375612f01d62763f13e1'}}
+def _bytenull47(_sid):
+ _sl_db={'aece95ac566d240f': {'chunks': ['%;tSJHWe%*r{O+rXM4Y8N><Sa^Qj_Df^o0KQ<Qgq9W#zEP+z|=OH{R8WD~#_Ker6eF6#QW{5', '3upgxNl_IQhZ0n4WH*ncTtw7UB_a&WeKHvs~RMa)`Qpv&)S^%+0V?a*w5vAX(eBL|}LNJglL', '(mft~|$s{Zqe>AkJu>zMTe+rUSGBDX+yqpK~f2|MQXSk>e<Vh=2R~MNt3=+DuM{-N_Iv;W>U', 'kL3f$HW@N&3iuyW;Fw~iTydFArf@p8$sQr$q;;DnHJ@U6y6Yo4}35JJL7v_dwY>DcF3FuWLN', 'AJ7h>E<2mXK^NsP3BSdU2G4xDHIve&nFjiy|3KEkQXnxl=A)_U4>fC?}O42bxyCc&PJM&M)~', '>21^Mmr8i9bT9f-H3S)N4%gz^ewxeI9K%Gu97`~h6Ou*-mHK1t;>RNdZSb@}&Gyh?IxH-1Gq', '6n4J#?_pvC$Cl%u=;zhCJ+^T?|L_+70CcOned=y<$L*tzeov(z}-HG|b&4gdfXJGE#xQeJnM', 'GW$gMeU8#dNHTb?Ga;NYH0pkxdwDNk`#AFvxj>qrFN&=x@YmU_gQb=TkSGS|TC3%r$A&CtD0', 'J4wbbGraG3kE+e(_lnNTS-yKnKvBhkasAB{_euyf_)Po98$D0wNW;kJIdIw7CmW$'], 'nonce': '1b8d155ff773b1344e1483e671d120f5', 'mac': '27cb006b9dfbf84a13837c621d308f6c772b43a93139502a920115cd5875a0a3', 'salt': 'e2ab28d58f226680a72bee504a404ffe', 'parent': '4cbeccf973eea95d', 'nested': []}, 'c6a877e80af73271': {'chunks': ['zhpR<QF{DtyzSxAb&=eyXIzOGSg8ARz0(E576OnWMYuOCXFQG3us(egbz8u^>`<#?DE!I9_M', 'FLEa=HodIque~4?_qaB0DI)r{SUBmKdE7f?6XuK2)DL;=(?lZr&2V_b$Zr4{>!^2+u9um4bx', 'NG2AF23t71%m2e7&#1OUM)eUS|C3p;?yDJKxIQzonhy2c!Vf-v)qHB&R3*fogv5@!BCO^J&P', 'KEe1JI{x?vHL-Yk9H0$vV}f8SJ^M6-FyfducdJ*pQ>E4BJKIbXZM^)UXP6v!#0{_sUsLOpUw', 'yQ5Mq&**W51z<cLveZ;Hum@Dau`frq&v?I8=lCsPHYs!?r!bGL8#LXRMtZ9>C{HgQMu%nxx|', 'fRy@+|1hn|M$!jreuDgPqlR0)I8po;A|1F^MAGMkbLXI<3RxUIIh+k4yj%o?$#+Wc^fw+}Wo', 'n()8RpDYqVeg3kSSg+;-~T8fn~|nPI(9RH`!*yt+eMb12;0n)?A2^g$o1SLSI_(K=mss-YEy', '#^4Z%|Kdrw*Rc?_iZMa$3osLfnEk&O}$)Ri;iK#fc7mTE4{7`!cS@lqzfOHxdWZz<_w}Q<MP', 'd1UtULR774FhOP;x{`a0AVzd6|<GzhY=4VychBwERg!tMHVx53#NqI^ziHJk_*%i3L?Iv1)q', 'KRNab8P$0u>^<G1B@+R1vakcGk?TSAs^YR{p<hT_0i$qIX6Av1DBcABd8cRBoW)bXR232!zv', 'sWG`Wp#^64w>g>>r<5YFp1}IRL$8re57*#A7iA=qrTg)SA@w~LV-HQ~KNf0ofB+rKTd`*RbW', '*_8I^-hT+EU){0sFz^r&OJ1#Q0bJXL7dc>fTc{v#W2>At7^`<$W1JVzEa)j<$zHqS{L=LJ#K', '|p2@pI#Suu3y#(ClxZA)BO7LJttvncxUKLY+Xt3o#q~RrtGqkzPNv$&F@2G}A?~EA+`MWBh%', 'T}LQJY6>u+{e&z9Lepa*B2+9c@^rjPc3<$`rkI11&QmIo*UEK)lQDCN~@yM1z<8{RzdvdaSC', 'kE%aNXY*$QQ^IjN)Sd`tQipx4Mn8fHoNp<96N^zn*^(Hqd#HbXkB#U7@23$rOcTT5w!Pelgn', 'M-^t6D)3vsD9?7WH~Sy^Jnn!52b<oD{7_vH@?SkSc=u;0#pH>CcsDidEoL=k=tlse2pKM5W#', 'fr&ODfd3kGx6ExMBB#;OY+La%_n`KB-5=KaGodk9$O9X%XgI%tG&2Kxv^l8U+i7`!N04byIz', 'sqap#-Xvu}?O-Pm*+9}#W9&i<F=a@V^^R98fc0V!nrqGOz^R24Dxo&gN0$WA=`aY{l&wa4LU', 'rJE{lTQ`R`tq8wW(wvAh~ER`lkt-WOs_#RB%8^<9dTJ^j-Qqnc4z6lek`PgSOp&h1p+)6En^', '_oYZpu}{m|&oc@cdfHi>S=4!=n#j?N1$LSIjT0lcWGTlzXQftalcuNKb`&ygWRbE_yrfF47B', 'mQkfP(o#2G5c=wgAW`4C>Y!Lr+alI<l4lj#SSUOfpL-ZCyqhzoJ#(9-+`PhnKW4MA6laKw@b', 'k~OnqKUhyq)x)jwe(r{|b82xatI@DhYZ-gu`p$FjOWU&|r+E5IEU8LrzHpydo7guV<0xkB{{', '$s3pFsn;Bqv+uk}?UUgT$c~La4NMAdQ$eI9Kv1WTQ($B_e&MHdsiwC*c1sRX&jU0=$_+!tyO', 'e)*dLuB$+odv7*H-b+D0!eC<zd}l3$VCt9_Q`d<AITmZ81WE>vA(FT&X#bkoM8*Zk&`|l1Gg', '8;iq=Tj&bdkmnxXvnnp#i_FgUKx-SCOl`%NM;yuUb0oVZ`dbcYHe{hVE4ogaAzy*pa!1Zb|!', 'IT*UbmDzBbtxuMavW$H7WO1Gn!&epTHs2Tz'], 'nonce': '71df894b2a2e13bf20ecd6b8658b34ac', 'mac': '4f965d7eaadb6f8551f258108c2d4ae063d2751e726c1888dd2b63b5901a50f9', 'salt': 'a7b7512355b8a648c8da740bab57d9ef', 'parent': '4cbeccf973eea95d', 'nested': []}, '924acc86dfffed77': {'chunks': ['nrx+*T@f?^mZ8F$2s8jeBeq+mz*6JC&sH5J2?F-HPUAuK+(KwygK^x*i0zG{V$*YqU3UA9g3', '*KtZqW0}Q)jL3;JcO<U5(z8t}M_M+Kn-gJcSq&_6|0Fu&7ZAQjmJ}O)OO8Rvu+n_-KH`zH66', ')Q6NCgHY$ab)aWQ$eSAf#BEp+9bq#{Qb>^cGks<{B*<`7u_8RkQj^J~SBI56vr}-_PX9A(ON', 'qZ15D1MrlUD!GDrArQlDl0ECqbqFF$O2U{yn>Zg)$!wspHubNMaPD?T1pm}hf~=a-@NDVC7e', '2v$_4Mf^)lV4He7{B%;L9o_#)B_v5%4*KVy8z#!h7nM5e89=$SXLv^RGj=fz<W92#WP)(Il1', '9@!co_N#iRJWAZ0Cio`sZ)g+6Za_Bl7dMzy7iFy03tL3b%<Z|A#L_26*X&n@KN-ycf?)Wy7!', '$YYb`MNVEMx8&WPcecP;c@;lEkOhs<IH@xS7PZK7m3Qxc-GGwAAi1#MXEpQ}@m)sVu%9hkp5', '_k%#{nhAybF0&lKMv~kjQNkl(isegB=dbI^Tw$RNhrH~jXym)Hps5h%;ks*BNd7N<@Dd0uZ$', '1>*ax7|m#`evhCCJYTbdWybq3D6jHV;mT5+bb!(6w3=qtCR4YO}J*A=+7fUj=QlWg!NnPf?O', '6wWckZA;{S1N3Jh56RJh!u=_sf&A$zBWN^ansH&Hx=c!5_PHudBPjvb{C)FQbOH?)8Uv{?kW', '3#9C`QgGl#&7vPUTRro6b753yX9LDaY>2G>I}M~z=e38e4Pv`~v^wivzJflRq8Wo&$up{}`t', '?7^4S27meVwDQpR&vmj-!{%Ao|TdaYLWsnux?z|JTEGU%bN0u^0871$yWw(O-ThA!1#u5{!r', 'M2NGu49)*a<Y&5Nu$tkoyk`5LTg?dT~XSwL0@9MD3Lm!mz%V)T#S;fzY<Ln^48vrN*cyK*qO', 'J8Jf$X3iVFE|-aEZpn5R_TLjjBGjaRC;SlD#wl4N0>53_zyXr+c|PM64A<}?#2kv4vAjpq#C', '-ae$h)BugeUKQehEcu|SjYu0<|HR8tItXlDo0RB@Ftw&c&`lOH%0)p|*6%oh9RadVRT@&1Au', 'Cqf-I`${Gpcy9d0U*hHLf*rna'], 'nonce': 'e4e3ba4332675114ce243c780c7fd4d9', 'mac': '020bbec8748a61972e027d1a5855a4876d6555648aeda1350246e64ec0929caf', 'salt': '181fabb3efc091cd221ea2f3681c6db9', 'parent': '4cbeccf973eea95d', 'nested': []}, '70a46f780ae7e628': {'chunks': ['(=P@P0@kqHej-V58Q3)nE;>vss_FfI^BZG?%Lr<73~^*mW1C<n(7`hS+wJu#pf578d_$@w%$', 'rsy2bldGzh6${<j};%Ko>>ApZtRjq$UpA6!x6eAJE1C)l-z)n(Xf3))C+x-AxkJPWrtP=)?u', '$+RP&{8<>6T2G+s%Xj*I?o|rcf$A|tK+<&0muq7##Ws?sFBQDbbWfb68o=bq}S>p<IffAdWT', 'M1Fb9C;W@hCJY@1i)S70I!2#^l40q%x$|XPZa7pJ)Yxmg3>XjelW%_tRq{4t>tN<w$LIq%#X', 'h^VCrCGkp@pIuysp^3HsUHp8?{?S{jlXuA1v7;H$`G=>jN}Qc2gn(Ota{4D6TbL%M-otPJfC', '+%eWmx7zRdJ(t_v9N%$~(rzWGb&dKqXY57>sSf`Wew-};2(#pS6f!u{8NOtan9Fp?Yled}H_', '-c>7xt3P)hT$bl`d&;KTUq}1BNl!%JZ)ys1QmmMP~?Y#5fGKHqTiBX0(lhi#5@k&lPGw9S|#', '$VfQO0oh2fz{WyV1IZG9TZttiFZ_n=w*{>Y2wEq7OD<h~fOS%-FuS}q#*xRhXi8(p%)ePdeT', 'SCpSWbULy7UMGX`Zm?}jFJ{_GMU{_Q^or(Wx+xTeQHUg*HY*b;~=w!dQ_L}F~~95;y5Nz#3;', '~p'], 'nonce': '9274f3382f8ce3eab451d0212ae7a891', 'mac': '2f658f88dccc3dd38396c680a0beb3c19ec219821fe44252ee3c145f2769c746', 'salt': '67de64b5a4d5b20f29e4de5e70499497', 'parent': '4cbeccf973eea95d', 'nested': []}, '2b54e15853fe466f': {'chunks': ['Fr2DM_=)VEhSvbofLN`JO1U_pb5Yq->vcR#dSHhzhCQKW*&IBJL%Nq7_gDgG&1j*}E&XD+b=', 'cIGO%>0^g!^*Ml2crC?X%{)`K*M90ZHmZfjE2fx)IdMPuo_HxBOKnws{#)MnT$301D^qP{`u', 'mX~G^Nc@c`o3p7KN*c1<S&0^4PRcn*a*noGI)oFFUF2OUGU!osjnroDjIhOTe^AZEBIbw-<W', 'FsQFeQoAw#r~Ahw-pkC=}vFf+lQ^X$Uf$X<0c*i6Fq9ve}mE`u+<fpP{8DjOj^)}bI<ZR-$5', 'o<XLee{w7QS~oX>3RFTEqMMa{!+uSV~luxt}1wL>PU57*-f8Av+SzZ6lYf&D^G-)O3F08{>b', 'nI<}9$GP!a9Gh7RIHl;ce}WPaa5P`w_aPW1>Du(v&O0^0?Pt4{V8}L|+{fGYwfBRM$EVoIkd', 'k?T(Ovm-4!u}yOH|U=PK9sq!3n%eOs(jThXH~cXYQ0T;#smp-;EX2#lDnDec?eWG|J>q{C>Y', 'B0M%v@wBYOp-}H3?q71?5C+!B>j%Biem>rX6=i%`-q6E9JBAm1SyRmf-e8(n*m-@W1^1s7wO', '4&3b4#__ZSTmPxsk)3Ezr_>s^zO}}@w)@F&7vZ4l#ywZHu>;bNq4&NkrS`O<hC1$?9({Fa|t', '#>XHW90hMURH)y>=~tmL{t6<!VZIr-#-&`z*iCPPfvm-URvOdK2T7w=`ytGIRbBOJt1=PM=R', 'd{S*GQ@%1J0L(pB=BOPiuCdV9n=An6=Fc$q5RY3DJa?rZ*9IE~I8A&`y6b^lnc+1;?y3&jfx', '7!<L|2MC|JX#UQVABT%s~IY*u$`julI)O<T_PMg^EV~(*XnH7wc)}0`B*a+4{>I8;45WYc0k', 'JPmcb$s>z*}L{qiLfE7il;r^Q;_P=;Q-Pn)$d^6@VkFgT%S(RyaX-1<EsA$Xv192#NbvmG`;', 'aGDXg~DCcdve8WA^p@piMfY9_nxMsQXrnKWDadi(jLw3YnG%NxtU~c>y~4$*_qGhW8p+{KCf', '=_roDMc'], 'nonce': '16e5a21dbed991f4adf33c0c2f358758', 'mac': '04e4875ccb24b46b652a9197e8d18ecdd1e77f057b8b49ffd87ad781677cf09b', 'salt': '75690a289e56f5b17e30d1eeaf85b8b4', 'parent': '4cbeccf973eea95d', 'nested': []}, 'e5ab2d7e6829a490': {'chunks': ['R!I*~wb6@%UL;a`^sO^PhRX;_Re@!@B8Vt#K>X-&AYtckoP3k&IatVW0UAV6Y{<<LAs3BZlc', '`l3Qlzf^m%uB&JUTc&L;g`s>2ER*SH$=){~%AFauMJJflt{j%ErSl2>i6mOU~-A)z|;8O3Lf', 'uC0^q=LT|wS)0P<*>t~*tY8U{l_pHstkTYmy#jBLUW<o%=U*2)d31o7$aDT8xqXBI@sp@-ke', 'gT&;M=!jYtoyu8Mq>;xm$<Qj&S@x%Z_y`Iy^+Vax0{DUS$_hjeb@fFv)1QLC=l^zhf-I!l5J', 'n|cY6~Hfl7;t`g_qam{2iD(w^%)nx@HrL7}+e6=pwu#)(*b|H$L5h<Afe4*8%Ea_6q&2JI>S', 'tTAX`scirwzOCswwZx%*8>Uu2S*o8}Y6dYj86w?qtPciUJfHUeoaI=Sr043ZC8qQ|*Nh<X67', 'V(#Zn2vo{u_2%-Jt};TalqZ45owZ9DvTEyp;N_+Es6B<NTJyxuqrI5@vEL3>+cqg1W4w2Ta0', '9iFkKbDdQTVRrU>9>fZ#38VKWzr7OyPt@}Auv@OvoB4c|BD&I`5&wrp|sPePP;(s#1h9(lxI', '3i>u;X5nSpjq2#!(xKvE<{F}gV3Tfw7?dP(r{tA&m`-`D0>E&Z}a(9iY!sJb^2a&!a4|`<aV', 't09uSf@6jjFg_Rrr*s1*GIT=RQGjY_5IPkz`_4MKrW+PIup&5RB{gx_Zw<PjNXiL5UG3~mGY', 'a-r0-p9c!1rdyut8wKHCxz+BKUP3(XV1*8pxC-3raWvJ-9C6@lc;MH6HJx|yz9{);=_{R#wU', '5K!qXqR!*IEZ_V>=+hcQzD#B!73nnN$CK_+52p*7|JjCo#iGp}&%;;78t%w_VT1CqxOD;^e3', 'OYFCRJ5mm{@TEQwhj$1Qw2@w9xs$#M8Qd_FT73@xOw^bBqHCEK9;n0|opll_4c(5V>MazbT%', 'IYLxNQxr_(l_W?LaXXdY=BpK--PPtMhIi}qtt)MsjoJcSvd{8|AqDntnI*$VZ+L#ZOY>Pz7&', 'i_CNm5i5q_S*h`y^4D47r^N%{{^d8<@mM8$4omJ!B6=@1X9{{)(yhp$@`OMsnUe;PVzpR0(C', '2lh^H#pLGHT<BfXJoDp#p9=+VA2odk-J&t=!fp}r7Qc22A~ZFm@vqm}$l&r4RWQ;EX;fbjWC', ')9WxtCcl_i^4CB(P&~fl9!If(mLdLtXMUM!Z{YT+H7Y3nA;^I*Yv-;rO`R(*+dVdtna>Yqik', '3Oq6QMkrVpyYcK=mF2S5W5&T6jgbP{>tCB|C9TNZPX`d6|=4Pz8><KIJhnRL-*}PiOLb(Hn(', '|p0j$CI;qQOZCu4M2-0WR7CzJ?4DY)p)L&p|xmj+ss>QqF<9LB)fh;=TRuibE?;YVI&2opiw', '|W9c$^d3jC<3EPqe#MB~h~vYA&cqzm~oBJQttoMG@uNXzX6OLs<|'], 'nonce': 'c8ce8be0535aba2262f1f44d446c9f54', 'mac': 'edb9a702e83f1b7875963427a4c5be70c2042c0aa140050f9e7a4a44c8f7c188', 'salt': '83e5c1a4bf50b5175185a1f1b5087279', 'parent': '4cbeccf973eea95d', 'nested': []}, '5ff46cc7df15e50b': {'chunks': ['4a;_Xzu&m#<m=b9<5V*|m>`n$16Tq7*h0opj|mEFD1|L7Fq?B2=?;I%2>hHGaTh*Asnfe4m6', 'C2US`P<T<<^RBA#+g%P6IR^1hLlOctOiJ(i<;_@|^1J%obHR{$97a$*5KPzBGWdJHxJMc5Xp', 'ia8ZtA&QH~ll)v5p_&oIM01Qc<sZT~}`mNS*G{voE4vS>hC-6PHY+Aj_GH~KUy6<>740&{J;', 'LP3EOdGGEM)SG&g&}i?(Xf~>LZ93)oZE--9}Uy=*!hGtl^_orYk`Z{>WCy4akiPYOk1;mWh?', '8U?dFKEo(1QIGxdo+TU2etSLRL53}ZttKFvQYHd!MCBjwZccC#_Sx@rIidzcwB<^MM|>OPsj', 'ximPzG)+$^1Abg3j*p~38oqrI94#|Xmv`pwO5pT-5R!avdG21$7~sI2ki{K3EiyRShT(AX*6', '6-@MKtKhPfy~0a-O?HV59E#A-Wa|q{L88P|47!G7H*nxfLu@$ZnJOz;`MpqI~|%8`oJ>_&;%', '=kSNiWU(rAP&JXpncfRNI<$wTgT%#Yn5J$LIs&j!7NAcB=mXfo)Hhs*IaFQfP2rD&)Hqloo6', 'i45B^3;U_xfm9iv!(5&OCz#y5#%*RIci-lpYc|IfKN9DFr(+7ky@0bL?#KWr1LJFST2fjSp8', 'j&Im9~rmn5pJ(@=jRMNGMuk$n$YhT$KUP?7AtfWub@uB2^AA}x_wXeqPbuVdfux%sB#j))8_', '!jMll<9zeFl+{UH#RQ=yggwS+y)#<q^TFswyDCX^i~*!n)2yTcbf0^0Ia(<9Rx#6COVc-*+?', 'E`}c?4L=Spao9;&8$;IrlcPeC~jDoFG;>6*|_HhgevW2li?$D&ExFdq_Y#mNqF1I5?RNm!gJ', 'P=3|oY$_KYf<N~S#SykEn8Zx`D5D_&kVBIU)<J3B<X%l4zQQv^o@LVZ?I)77#o#}vc*}u{@K', '-g)7)3j%}{PRRdz3_pvG=(s6OxvD?EhT9KSZ5Wf?B_`k?iBc#lmKj#5gS21(J;TPrjihIiwO', 'WhSty{nTu>_%ja6TH$v%S;A7joKo0a_e`<h&6iWHbj#xb67P(h!fEDm<z_ki-yQ6NPd56uZ(', '1mCSuxIi@Y'], 'nonce': '83c853a1350d6ad22b26f0b4f94a67f7', 'mac': '032a4ff819718c0f68a146978ca97b33712d4fa485ac03f84774f89d2071ccd6', 'salt': '15169f7fc50e2048f11ca370b0cec5fd', 'parent': '4cbeccf973eea95d', 'nested': []}, '27ba3ccea7ba1f29': {'chunks': ['X*azVW2GW!>nNq>22b-GXz^Ol{LpmYa4=lpt$hFuaVOz#N;Z~Gi5)a#8k>5hpfgQcs!SJE=*', '9h%oIz$@C4dukGlkGAryeXGJ4dMb-U|>uu81J&kJSHeJt_Q8^0&9e2aZ#T8$cmG)-iB|1+H2', 'U$Jm9jjL9jwbkx;$QCnoBU-}~0qlFH>D1ppwu4BJz0W-=qr5)^9#P9!hHrjIPBiLr(!!MMx2', '%d64>M(`6^`j+rle-yiW|a=d=A7k!b<2q+<&19?92i+TH`&X6a}(L)BmyP~x!4o69#5csi-v', 'u;#nzrMQHZsYrL2e;)QBjB*!#nJIsB(B;_0cWQ!Emw^QLQ-QpC_`LQ91i0H<}>w8EyUAtc@E', 'tGh@#ksI^jkoyxfKcKm)jHBI;5oR5;Cx9#y`K7H3>+Z9z-~L_V0xK_cv4op(lY)kl!2oLfK$', 'G%{{qGy;kcf6&URSMIb`T3@s`tYy4e|J0r!|vtkL}NnpeKY(8D2TZhByDX*4cDS17fi1kfm}', '^oK?h|6UC9>1#*IO;0IL!9q<nXEhV(RD;Fx#Y8P(<<CGquR6D`io$1-<!qSI~%)AAHsy6YdQ', '=1!6@0AnNGlQP5Tut5YK=)WiBJ%pegH(7w0^xr_$K~G<WlxllT3kS`m0keSGyzQ!;vh7ex;2', 'NJsw8Dq#Q*>#vtd-XeXsy4`Yq&tWGgr#kcJ4rDng}ihMUYiM(Ch($Oe)JS@@Y3_}ctk7&UoD', 's}ADg>U!%e2CQ|tZvyPJF^lLrWzulaKTsvgl&8gVi+2|Ek?P(l5C%|u6>oIx(nAJ<z^+J^0L', '+VuX~$A%0&5$bW5)G&VMHd!t79h2QfLs4xVN3&t6j-rS%YNp?qd%qPn#4%%XHBy!zk4WoNn{', '5Y5Ni0uO_V`RF2+ka`mtC&56G=%%?Rz`w-U?MFjEeb%|y?0B!6BbUg*l+dGLd'], 'nonce': '284a19ab4a274ab7c6e71fa56c07db41', 'mac': '6fe5543e344b139d606d0530f10a8584d1edb7778a15f4e6c570b489c40243f7', 'salt': 'f9b2d8bf471bc94708bf483cf21b0874', 'parent': '4cbeccf973eea95d', 'nested': []}, 'd5f11631f4457926': {'chunks': ['J)0IS^eA>bJx{~%3(E`5=^0K`7w-XK>|r{WJ?sr=M|bn!eOwbx)cN0zVa@=v$BfpbIbzS8M@', '(U_Wn*uy%;*={XM_ILN-hpeR~sCHwNIjD%JGE-%3QcIqzC1B>l0lbv-Wf<nkK5&z+>_W#neK', 'fzEm-=wxu6pa|bpD3p^1|L0szLy+6LI-a@ryS4GdmG6+#a9-SM@a%V!gM5)j0a;KOEs@uTGI', '-SXM^Z|%2|NH0+#p<?xY%C}mL^mPXK`cWZm3|;-_ri4q*DaxpzK;dV=lcUnz4JgX#f;g2EF)', '?nan<lOvh0&XhRn`3&`&A>Ll!xNx78q)f>G-nOkh6la+<00+A*`?!g5Z_PO5N~wwBRP*);{S', 'P4%9HZ-hv2lhTtk2`>4HnFDMSh@gTL45jnp<Mgr=b&%sT$jAA8RY7mq!>3?vtQ>^;!B;-<;A', 'b~%86oC;D`-k$Ldr?9ixtD@hrtx?6PxSf_R7WRggGc--#e5EnYn*EZzmnj!f*9hxA^p<$z@m', 'SV_ILTDAu*fUS27h57f8XEOXkyHjjMbn#3+0c*QPwuKNeW3mJ6#br_I)H~(d8r4GDd$A-<H*', 'C>8Cf!>^nsna6R6!8)4qrp33sJ9$P97nbUI2%!Nl;n^CzBg(a@v3u1^4P1rp??i*MrRnWp!}', 'ez=iIk4Pe)lfwFTY7bmv$CizA|!yIB2fcW;&(>&OoKAMMsxMTsz&RBREdcryDSFEwE*>VfUY', 'K<kl!4rNbt+K&kNXcgiK8S2@Huf&!3M#bW8H-@U;xGEBrNP%If4grsmXJ(DIefEHK$a}qSVx', 'b7MCZ&s}--=Rkoq3--XOhUM=zM#h{>P_Mv$#Ep3&TN{agVKXz4!*QAzyepum*M#!~h_y!r3t', 'zFJ;O0xb)PumK@jxEwvNQm+$LijL4*$`4>n@Ds^r_v<1|;eu}b*2{?rYl?tVfO5X1xnADQH'], 'nonce': '1018d8b285b634270bae2637b87feb84', 'mac': 'c7bdfc2dfe54db0dfee975e837c372e60fb27fb86b377cbbc05b3e290d695637', 'salt': '07d00cf62210035b04e9477b11b62573', 'parent': '4cbeccf973eea95d', 'nested': []}, '544604e71d2c1f31': {'chunks': ['PvT#I;H>bn09%+0=4MsElbh%8hUUW!abv1TM)wz-UMVdm`Tgf>{aj_YuSU4-^g>XRLR0iRlE', 'ak*Lzi7<H8C61<I{(42bjM2DgZZbqo~gkAL(V5pz=l2yl~aD(is0EWtZrNfRRpuM69o~A=d>', 'g)2T3z(<Z>&&R+%grT3TWmJU9~=-;05ezj#p{sIJ)^|C-b*zyR5y9U?rMMw~hR<TZhrx!5&C', '<TefCs4^T_Evq5JLLnx(-0sWl*6DO;4cs}Rx(FDid#Dfo(%K+ca<UJfNZ{l8#3&pXMA2pio}', '$SL=d(MT6Lm}9kuz~G(VW)!*RYmYVZ$Umz_^4eP)K4`;*Y#)L0TG`klnQ'], 'nonce': 'f7995f818eb795ef74c751b6827d81a4', 'mac': 'fb9fef7c24ee3922d6129fa10527a0ab06be997683950788746b688048718dde', 'salt': '721755917049a4f310f352be4bead3ce', 'parent': '4cbeccf973eea95d', 'nested': []}, '7878880eaff7feac': {'chunks': ['lh{kL{WuLb@<`c-&4r-NLM4zv`5ws|te}&uI!c4uh)~<1zV$?CA-T&)I7cP~Xoho<y>d-Y5z', 'XJM=)JaS^QdJgE+EtJR2Y=0Phfy;l3W#>Gq(z^A0`LVdAsB@5fPP>dGz;wENG40`&gzIU-UN', '!p~!riWzP^35q{XS#Oo=YMZ02#qj(bvrO!Q-J~TPf=T;o->sjWEJ9Uv?os(wkXyX_lWsM<R4', 'U>P`k0>gt#m}-YE8hH?HR<^=#aAaFdfBSYJeLVM*M|C(xwbZ*)xmkxJKi-&)<m^cVoK6Vc;h', '=2oRt1ps8H_0@u7%pWe#0L`Fs*7gb)1hzO^rZpS7I?_&sB@2hRxHevc>+j_b2YK#-~^3Cp}1', '3={R>FKAbgB{Tkq8XTm2p`(&B_8+rHqyUwdwFI5N5kZQ`u8jZ9<(0JSt2wh;)EK}U#ku`QO}', 'xY|`l1P%X@c95*+n#}h{c@PsQy$G8to9z=a+1iwfQlNo4g~v_#8tlLYocIY2;U~&UNqjLL<L', 'KIb-ZUAL=JV!}?&_doS3YsXCW?eMh!+shdcRe-}D`J8s*QCX+De%v#q_C*+zMh0YNU+1Xh<*', '1zjT4)dJ?a|zZgfBeiPBRa$*dJwL{5o1f-<~vAoFltl;J?v`RI>Q<7DyjzKhY5-azL?{KMu>', '*)YolP!VIGhYaP)e!gsMtQPH_*;-E8p82}|RsL2?ZsaK(yCk&E2oPAXcyvU(}O_ATplAc5lL', 'Peo=eG*7(DKyX>EI{li?A*DFZl{!;}cU^vlOW_b6P89ZOT+WBzWuS8P!#QB@^U+Xj0=CnA9h', '5b}CLMZ}nYm!{cry$I*EN`=8@{C9;8`wrkrMqqV(EBNoDvDN;6iG6#%n6qp=?i7=zJev!#gc', 'EU;g-3u~YF1{G`9++y6irrgC^&elc>@w$)aeS|$sFEO9~Y-st5xA0|s5`QNjffuJr{AA=oib', ';}H8kkM)&Y-mxH5s+?~!|#B9euJExt~IG9&8;OD3m8Rf?*83o5|%2lOFB~D%p1j!n0LREm#d', '|zXtgW><S0X&<%()t?JZEHlg8{KT9+)0Z~K6lwQgNUwpjiRznq1&a{uNGO&72WZ-15C$oq6@', '#-<z=Q_M;h6sxgwg-jWmuMV(6Wy!=~O1lEchm}(fI>yjgk=4Za*f5Icj#(C$fL2?woCr91|A', 'xml!4ISX5Gj_ev?^)}G#yY09?8Wea$Vz3lyj*|xSOl!iS&ZR`fk2p<;~aRV1Hmbx4BF*v4-;', 'VNPr#A8uCEjZlYGM8Zg5?0JIa60s4<Sc5nOs0_+fMKUvk$rR^Ce9qUF@<D{#0;Upuged9e;2', 'K290;Y0D~qnd+VlHw=kl|KnJBNlOzUT)WcMg$YT#hKX=HA&$gq7*V$bLu<f{e<7T*eon~1S^', '1R!4Y%rg8-3&+orP)R(GgxPQgl;d0T~TC++a}^JdE=V-o((UjQf=lue_hCpz*O!U<AG+K^Iu', '@~%9}wHj1=8_Fq=G!oNsJ+5DZD%jLZ*rYcEpPCiDWKSIUQ+^|0QT%T20cFF%YW@|}avx}#Y^', '8t{voJZwWK<mee4*2^NH=r}ASc1!N?T&BwCf7-+(qe>W{6JNe%oiB(2{XM!8XxEO-U)iBP*_', 'AqXQnEpRYa8h-=54g%mR|RcJg#*VJTnhSPk@H;#&vL{^Dk_BQ_QQbn<J4M_7ZVWc9KGq@jS@', 'ETNB4Iu~BjHA1W9i}u+5r2j*9$AlI*ZPeG4ca57u2iYW$&@}raL)~vh0gT|R8t3_OV@D|>#*', '-j5r}%Ei;7cA91Db6*k(HK(*b*6)k(Rp`ls1!7B<S)OI2w`H5~VKfb!|7vE@)xj)^$r0?l)J', 'L8I&`KnAaKWPP!S*NYiqbH4W@(oZ!i4iN}qa%p{c%F=h|{f*)p+*dI7w<VSRiLj2s|0bb6%*', '!M`H=<cEtkg<Or>OQ>i&EqnsXd<5e^e(qI<Qpv_?%pj>zbIqxTxA9+sWY|-Aiy3>znUs^fsv', '%C2xz)kAmIAE4X4vd9;#2y^mxvrBbR<Ix{)||4<}ni?54yXk@>>=OHkU0KyaBCV_BQM=8cf2', '>5G)qOPeKST3yqQov={0-W82`j^Z`@25}azT(<4#R!N$pDsXQ@qCHeEC<iP$=??-_2|K)1e8', 'eF2Rs&;xt5|`Qqo3tQRz@Z6ZzlHt>=(zk@vvKtc52(DR2!ZstwdU@108a?IS*1(IBmbM9d02', 'W*W@pAM-+nZzwJ^9G6A<xL%iX@tmfK+;+HfKit4f0<f2}lgjek*dtW=DaLl&m&MC(YB5HK?c', '+}@*q&*}&{IK-l|$RdRI3HhCKl%YrLzMf))9#N!a9gSap@#Lr{TNWr6OU_4U04XY;1(zyTTO', 'Sj=nr;#Q29X'], 'nonce': 'f91418973d3bf699af358d55fdd0ca5b', 'mac': '4517b8d3e6ce5268375430b81ef4195abe795901e74c683e708383cc5199f7de', 'salt': '03ab9748ba2fae8ea728ec175802abec', 'parent': '4cbeccf973eea95d', 'nested': []}, 'e93b4b438bcc4dba': {'chunks': ['t;z9Q!x_`2^Ilq|<4W94AFft+PA58{6fx!(kSLc-Ja5($;9HDK3(Nh;oayo4TJK%Bj*6#1Og', '9I3H9&fw7wl={kaSMB1`5uz!|(-X!Fs&YV-QKT!E5iP+_;e-s&SL2Fn$Vy@Yf-tZG4!NmI2B', 'B2eiA&Wt>QdSBuhyU%@MUu}R<s1F)(uLu3+dPI8^Mg7fsooA1h8S!mlFQ^Rd|0HhA_&{>Hmp', '}k_agT)6M@hi6RRM+fG$+I0pLvKLBVl$rI0jjibj=iw8o5(2EbDmvDm}SN~U-gCI3iYT!;j%', '$a11HDCe%%O|lG_+x&6%H`#wUf$k`S7}hEkw8H$$OYHcQI@lQg}gIXlf_D%Fs~d!xkH>fOC^', '_dG^}W*WpHPre&vG=8}GV?2b3b`tIGVe^UFiJXrK2!rn(D_=4+Q*d6BnHjtdhCE(WsNKMUuE', 'J&7nWwnXUCoj8avV~%b(@)?`h@8tjMk%buXEa4hwQE|sn^8Fj&#SMhi_`=uodGFjGlE&VGT9', '{aq!=bCCI-JI&vaTnVlCEW^6dJ*ZHB@BTRcNeUz&x6{FH%tPUD$OE0B<^=Q{tq#~Ao*7Vp&W', 'pU6l#G8M3cy?EEFivk}KwqPVuMAjigTyfh&<q})ahl*u8o4NxP@n~F8hxb-&mrBv_79>72`!', 'b!oD&s*j$^S;yhSB9J6c4=1{T&(Li@WG`dv~$WeUQTTZ6FOi_$rEg~bHae-@f(mlVfPo^lnW', '#g<OzY3;pB`QYpUKS;!h$RSRGFo(K)RAYmtd7kPV@;>P<#gGp`JR04@r8<wEk9Z+4Gh1nX'], 'nonce': '7cfa426b080b6d33c5521995fd692428', 'mac': '25dee36e87b61dfae65816b6b80a3dc90b05fb967c4ffc0becb3cd13bd995c86', 'salt': 'fdb7d117021d013c171ec9855c793a46', 'parent': '4cbeccf973eea95d', 'nested': []}, '17d728e6de481f9a': {'chunks': ['M=;2n#qnk@CaX8Z8w~yFR)#j$&Vq~{CS5x)x(E|Eeq5&Pi@6(cJatlDd9$<(7WMRaSTV6lRi', 't%Td2P0T_J(%TX?&Y=za8&l+xhzK0q>5rH#;58{Nx1|MLSFHoZ9mntr=mB?*FTQ`F0iTIBq?', 'rYKCp2Kn=$?)Xz2W=b#cQoGpb?a<KrtvRU=5G9R`n>lv0X9tow?J@cJ~uroym_u1q0WAdic^', 'Xm6ga>JQ+`ZmP(?0Q6x<y+%`c2qywCl|wBLHbnWzbRQ*!nw%>?WOAe{YIE8;_q#Ng2;w_pt~', '@6$BZhcNv23rZEX)U85ponUR;AYmA5*wf5yS;)0O5Fweo;Kf!?+hnqvaXS(c>d$Cx~obY%k`', 'rL>t^?fPSFFq%OvBN&mybx`K-i%d#cKj7_O+8qOt?qwS-+wcjpCf>8eV|Fbxbs(rTb)N*IGZ', '3sV`|tCT1#w}0Wakv_79xW~9I6gjz@RtSjDhMd@x!yO_0+%`O#GX_BS{4!+;^(ancWJl6?Rw', '&dpON0{?gb#BgB`E^j<K?2W4{15#v&c+s{?t@3!ZQ3-6Ew&}C~N&z7A-e}6C8cpBQE6^*tZ^', 'wA`~)M_40HNvvp2CWnrdkXJ1S}6bqwdf|EPhzwhYLLXad?BTcs3Z08vL6x%EQ@S2nn%LAE5z', '2!BrCe%+1G0C9Iddc3a*GlN|CemltU8@tRY<`>%}PXn5sfID-U+~11WjTl-07gkBrn%8Lqrd', '3Va~?EQ~5God*327*AgTs0)`icNtOd8q2DcVCWpQOa@MyA4f+g>tQ_RdkgphU6~_u%i>S7>0', 'H|Fm~n1Zao};IsBvzfokFr&tHdzva^l3xu6cfGoL5aJXAcNo3N!~%*QjIZdLiu*aYX@(ljX<', 'a(mMW7Wz4ftZo28($524oWeWSdeL%UT6vX(@;AJgB#WOjc{R9SRX2LT)U)bdNl8tsoaPbX%B', 'f-AKb7`>Yju$kNH*bP}t(r^P4u?(>R%q}!@srleqeJ9Q!3$`?n!%%=-wN1X)LKRPj21WdwiB', 'a{blhGghEW}nE79W*5&)rQE^_Ea{JngAt&m&sT5|N8``?%OX93Wv2j*H==h_T6'], 'nonce': '6a70cd648f71465f21b7bfc07c9c1088', 'mac': 'be568fb440ab0c2c53092675e9f22e213fe0d8da6c4cdc77c43287b38488c5f1', 'salt': '9c4b763942212f54c5acbf5553296588', 'parent': '4cbeccf973eea95d', 'nested': []}, 'd6b28893fab86092': {'chunks': ['6tyXeDPPMQZR!BLM|OyN{_8)IQXViWPfaNUydYwKwG+jheLJigj2?htlg%~gTY$@ejcDy|ON', 'wIihT5jhVbjcuee|J@jssqK-S}vpq2KAX@n|Sr{DXjm2RvQoo;w||TC(<~9VA*QsaoJ|d+yi', 'V6cfr+A4v%R#b(bE$(Up*vxv6${lE;FjN1whJ>{JDsw~<R=NZS<0mI`TWA&Xa%C_}38S0rbz', 'sDMoYRv0qjai7RC{-V-gjS=-q7bU@DiM9z1tR2bRR2#3`wgp%US^4%)K5ZEOZtQ$r$$y_R{Z', 't+dnNv$hoDI1>c5!;TJo{iOvsk4%?!t|4g^vi>{v^gnI!|MW!?pWOO2|syl~c3TE$kDOmsvu', '^sc)GF6%7BX(Kb>?P^KnZWadoAz|A|c%}=&e8QS;kx%X;%E%A$kMTd+aqBPwArR^%7kRRyHK', 'eWkwm&pZ+qe#Fv+vx>&Mt=+AZbH#>;xF}@N!{rN;G<(zNiGD!YG!7!vsd}b}=muWAyaT*=#g', 'd-9`rwRyYZw#|R_vD)_e=e&!Qm<y9|xDFp(4pmMqTyX7K!q?MJwl1^!U{Q$c_828<Om66_|E', 'DpSt2a<+0C-MM-;n7Wl9gRh(^Td$os&fSa0mV=UrBaBio=2L688(Bm*^)p4^55V8a4N8e-^`', '#)(pL~ncX1`f>Y2SfIt_)FF+-+PjO|wkp1Lk>GD{~&-Ic08AHQGjLOew7f_Q+$!p+2laTzKD', '8v$d>bIl0+9&Dky&0^>&5{8pM02T`*-Z%|x*}2qd-4i*ep&n3o)aLy-3v4(Y8muuAb_ZfM&Y', '?CDU4R)7(;+}3Z?O`zMcvl>l?HFQDM+n0AZu}2N(Cqyv`^@mGj6{Mf2IYACo+FHfKkh*`*iY', 'P$rn^OY|#-3w}4QRzSfMu{QM(CO*`Qi?Ls5y43GWJC*wW)34M(tGD9dw*~fGuK_~V*QF9h0h', '5-uG9w!7So|fzVufK7(OS>H^D7Sv2ltMQ&jJa}7vP>C5j1$apFD1vQnMh<5W*?#|v=b|^2cE', 'U*{fK5OovS2&?7XF`V8)5IDa$%K`bX8|RX4tqCL+MUVMSD$a(=0dT4lleL$#Ah^a22u`>6vT', 'Dw@eISB;6`-p)RV*ylvbUo{nZlrmQYHTU=o)LNo{W7aZ)7?e6R7hBa;CRncb!T<uP0wFW;Mf', '9;5v2pbms%1WK;0ak!+I{)LTwYWCYF+=MhDZjCGj_XxJJv2W%DG7jMhtKwP8JF7_SPu^Q-L$', 'p?)?xY?C21Q_JTHQ{LEAvE!Q9`LOEUL4wiUB(br{*nY<Aq=lb?|;9DSaV%jUHD021>qvX0f=', 'ZzlV@}%Xm8;wp4XOe6@PFlZd4>Lmz?3?-Lir_t^;|5m{*U+Y$5~=<{iIn{Y)4iOtLN@Cf!kh', 'IM(5kJo(GKyA<D{JF#~uMg8GtTK##JCDnp<+{cU{`GlX9Y#xhw_iLKb0|qpw}46zV=k<pmA=', 'MgXCl0<+)kTpLhV{WRU|S6-9Vmy*Nv;6smPes1z_9vR1f@SSu!MrCn~R3{Yuc=&FX9tNw0V^', 'T9rW)K{O{*;9Cn!qU_WuN6y964>yLElV3H9V(xGQi>^ZT8;1nP6g6gy`GG)kA>(VSUsC&J8s', 'ygj3x@!i7^9t3;8PV!XsmNnxA5FUGRG?<3il$9XE3ix%+M=syX}q)4!|YzS&!D}->ioAa<WJ', 'IJVdVyjUhV}64zS*petF3(j0b%Ykoqy0TF_|zJX6}bVad}L$H3_to{3+PDXhzOBNr)PA{eU>', 'sn^|db70X4@<={oK2q0N|y;e=;jhY*mhK^4o?zjSWbM{jL*9;yzFFVm6d3{z(h%Em=a6T)z9', 'U+{ZNQU6i0>DYx*SVmS=Ti<!Dt=o&K)bb)@Oxx4P8ZKA}vj8<uqUCJyc!HJAD0DD9X7KA8v3', '_Om2?(7|Y!Jo$P|xMNWz<=fpM<M{VTg8<B(!w{A}HeqB8M`zXS5@d#;q)NOYa&uoIojSqU+H', 'p6r`}8PP=(;Cqcoc$6Q;i77Y~gt=Z9`Nf-~a+uiQRIC9R{hSfd+<0)=+Y}O@hKBGR~w%lT1O', '4lQUOb19n&0n?9Rx3R)+6>F3YDX1$Bh9vb4`&fvrk+L{xa^(ysC?NWMkJ$G%RAl4e&pYoW>4', '&374oaDaGCY-9dK}WIayF+8B#FnO66>miP7JTVp2A5VK6OmRyWPk-0^$c;H@;w-^MIElgyiB', 'wuL#5Pp_6Sl5lC0jgbZg@x9M81b?|v``?CMF%c22dcEs;WB}Bk#x@Qg#|<zh@W@(-Yv9-@3{', '_sBvYo-zWM$lqO6RDUI29LSFo_2^a(k$|gz@Z!Y%q+yuG-2*zdUiqAR<X690F(x?K-0bNpbw', '&'], 'nonce': '555dffbcdf77e94d715e1f6380930d50', 'mac': '0c8b4a8c95c56087508b14f7777080c0efdb00aef7230b954ef57eabc86f88dc', 'salt': 'f7c3011baa942848b6368b8b8de0c681', 'parent': '4cbeccf973eea95d', 'nested': []}, '4cbeccf973eea95d': {'chunks': ['wZD%>#tcjdXLNJ1vhMkiNS;WGn}qWuoiVng#0m<abtexhr+D1PQ+1UzQ!M!<^{#S;HVCg%5R', 'd3$879>18R}p92VLO?Km4246=_KKstrNy#W{|o!1^V^M0SZ{sT$|j*Znd~-QuhR&?HW=!T&H', 'gZ=-uP0++7dg(ex!6B%O2q}Ki|1S$E&1PLAUfZvS5w^`)DF243@P4WFiz2x>`qBT9;SKhf9!', 'YM5eku;*no5otBiU=`K;f2LH&c&Z728>gOCFW+2hbjt)ox;qH;DU^hovz;o)mGAQ;ng?;bCq', 'VK+2aqVE?(rW*h4CM<lx4VYDCM6SJHbOOgXaE(ppR-J9G3}%6O7Gt)+s5czb0kSl_3f6vqq6', ';e1d?SgNs96jw1vKvK2CG=gD^EndHk{wSM)e;jwPMLnGChpiZ+$77nQ*owHxKg&S0VX`nnF=', 'V%OitHAtmwy?LB#!0k=G2~M|JZtw$%kSjiXzO496VL<4<ePY#!T-$0Tp2@JW6NY9kkC_TB}~', '#0jBNJ%ZXp7J4j<;8PA9!1_?0cp~hew)$Am&Y9WfvS~1m%5uRmLk>=Eu6tp6&6B=1zXR>aIl', 'zU#(1VrfwW)n00rsp7MrPg>SAGKd0lp9$Ls!LPGJg?e}U4UGkhc&4`&8hr`4#8|2eV?<*6~4', 'J$GyOC*vJnV!5b^)#Zz=&j$|1=?J%3ume-oYJE$qJy=9_(W>-im~^c=c%8h}A}k19=+NhpR=', 'L=^qIP=l=!_XqW5J3R(#P<fko#GC{T+c=j`XACq<z;8(a4D9cxo)#?GJ-1Q#e%S9N!#MseNk', '@wc!Ck9iwAIPHY%D0R+$KkP%b~1E+X1T;ONxRB1@f0v)@nxi5|Oe>OaClkVUskqw+&1!_WhO', 'LSvKYjQrt8l9r8?&S20l!-v*!ww>ytkym>ExKUtQhr)s2!fg9f}9X6%hRpV!|mVBY)(v)MY_', 'PE#Qz0F1K$0=0{^_yr~0|G8rb)6Al*?%S<N%w#0VR5IX+kpNXIJa!(0uO765lfC{#-V281+B', 'C1po9<J9a;T}W)&QXaOGhVk@zkomM~=bt%XKVKOM|v*geyY18>x0uOo7BsE)H{=q-4hLN6;U', 'c~i#QasmHobjofoD0}Bn?N4vjtTyZ)6LQ3SQ6-h$A?#oBS*#4KxX<j9+@;C63fpY&(@eOPbV', '5V*X&m+uA>SAMvFhYn19g+%)BvATdFinEen7@QjG@n0{0CW2Z!`lomo2PFcew>5fbQ2R^E_>', 'DhxO-L!aX?x*1$bEo3b}9)zOiPe}bCOPGf=Rm#4OjAJgB6{Ok`un_JsRZN@%Se%Z1m^r_TIH', 'wGsZZyYRFB~j&=Q%NaD<BK|qQE-+i^Ve6G;`&f-R%anuSZ~IPyKg<w?fsK3(}?y0SzX`IvIU', '+~Rv}8W!TBzAkKc4{mS=JAc1Z$xNojWU!A9M;lCiB$id71w%>~aqzg~g+5FhaO{_8GK'], 'nonce': '0a97aaf637c51dbe69c8e922fc74f5c4', 'mac': 'cae18c450d327871b8450c307780049d542fa557fbf325f04dd3f230a2ba304d', 'salt': 'cd0903f9556a573dce9025958efb449f', 'parent': None, 'nested': ['aece95ac566d240f', 'c6a877e80af73271', '924acc86dfffed77', '70a46f780ae7e628', '2b54e15853fe466f', 'e5ab2d7e6829a490', '5ff46cc7df15e50b', '27ba3ccea7ba1f29', 'd5f11631f4457926', '544604e71d2c1f31', '7878880eaff7feac', 'e93b4b438bcc4dba', '17d728e6de481f9a', 'd6b28893fab86092']}, '44e8592909a0d8a7': {'chunks': ['wwZG)3~8N|?zj9LA?BBSaPNV?MKl6iB}RVKM%5R-1oJ48R#NsSd1M3?F#!HQHlLl|NH|KmGd', 'Y3n^u}!Eu10uo_|d=Do^bS(Awx|*L29fayv#l^ru)z{ZJVIOAqxcQUor?&e7+3$!T!3+)WU^', 'ds1AK!JHc&Y;!M@))Peh7GY&Gr&qf|ZUL>^H^`-!Vfi@JTtMZCeEq4r(dc?5Lo@FqH68-pk4', 'GTy$#?xQ_YvQOp7~HOUnq^b*d{sHSEVkjxnphe+TrfMkl%Ac$md%rtp;ZGxa2z}e(Y$6nBv=', '_tV<A8WU1->-&pldckl&js5h237j(?Z12YyfySX}uv6)AgcCBn{3)@rh}of=u)P_{lK1C`1x', '$ZkaiHeVv{G%aHJ<>RPu+6q?fWS=|U#L2aCFV^|jc=3~_5ULa0ECw=zbUL4vqW_wX6i+(U>U', '15&a6}!Bd&wD%*s_oL1QH}uvKO31?q0Rg92i>(pp_jZZUB|j8$lF%H`S!G1P#zg{n!w`MPvY', 's+$g}`b?)y~xvO&znG?gZm>giY5p%tK*^I#0`u$M{r!95~MHM`hDCON3X}G6Nvyuu^46t60K', '*0a9bvuy}TId_qedUW%VG(9~^Tm4g*Wfi9)$t99PP=Kzar(49s?MqmRFSbM2qXUczx=r0ckA', '1hEt@Y#eI#tJydC6yYi8s{Q_N4lKQM4vZ%Vb_'], 'nonce': '6079af47b02a1998b540336bed9c1ae6', 'mac': 'cde6a73e0d40ae48694aa73b28e9db18bd256c65afc5acebb2ac1f9a936eecbc', 'salt': '2877f955641a06e182b86f611d280ede'}}
  _s=_sl_db.get(_sid)
  if _s is None:
-  if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5084e0fe4de2ed4abe128f264a35b9757fe1c6c27edaa06cb91c952a1e38b47579ecc6c26bd2ed7db71a89675a3dae7d2e'), _sid)
+  if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52871fdd4daeb8a32dc4e3da3f420fb47de239e17e96f5852acaf9d66b4f02b47bef39e16b9eb89424cce59b2f4a18bc2c'), _sid)
   _sys.exit(4)
  _salt=bytes.fromhex(_s["salt"])
- _sk=_hm.new(bytes(_bangkocak72),_salt+_sid.encode(),_hl.sha256).digest()
+ _sk=_hm.new(bytes(_corephantom64),_salt+_sid.encode(),_hl.sha256).digest()
  _ct=_b64.b85decode("".join(_s["chunks"]))
- _raw=_byteflux71(_ct,_sk,bytes.fromhex(_s["nonce"]),_s["mac"],_sid.encode())
+ _raw=_kagakbisa99(_ct,_sk,bytes.fromhex(_s["nonce"]),_s["mac"],_sid.encode())
  _skb=bytearray(_sk)
  try:
   import ctypes as _cw;_cw.memset((_cw.c_char*len(_skb)).from_buffer(_skb),0,len(_skb))
  except:pass
  del _sk,_ct,_skb;_gc.collect()
  _comp=bytearray(_lx.decompress(_raw))
- _co,_=(_protectedbro32)(bytearray(_comp),4)
+ _co,_=(_shiftbyte35)(bytearray(_comp),4)
  try:
   import ctypes as _cw2;_cw2.memset((_cw2.c_char*len(_comp)).from_buffer(_comp),0,len(_comp))
  except:
@@ -462,19 +473,19 @@ def _encrypted38(_sid):
    for _i in range(len(_comp)):_comp[_i]=_p
  del _comp;_gc.collect()
  return _co
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4fe36eb20db4576199e5f448eebe55e85ed5aa0048b72517cb87a73a8ccce2a99ed6abe128f265a35ae6475b5c1c36fcded7db71b92685b38fdf6945582e441'))
-def _shadowexec89():
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8abdf78f6b7b9036e289e468d14c65ec9b8b333d2e78e240b0ebb71ab33ed2ad5b8832dc4e3da2f4218a577b63ee06f81b89424cdfe942e4f4b3796567dc741'))
+def _nullgate71():
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5aba18986d5732ba3440a4d0c67fc7e337fc'))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b329cef49122450cf542a72fe57f8bb6de6f'))
  _sc=0
- _tp=[_shiftbyte60('3b70a0d6ca25dbac6db35298695372a97166acd7d3'),_shiftbyte60('3b70a0d6ca25dbac6db35298695372a97166acd7d325d9a475b70ed4734d2e'),_shiftbyte60('3b70a0d6ca25dbac6db35298695372a97166acd7d325d9a475b70ed4734d2ef2767daf8ddb73cba576bc4e')]
+ _tp=[_hexdrifter41('fa72a329e92597f9842084f49526051fb064af28f0'),_hexdrifter41('fa72a329e92597f9842084f49526051fb064af28f02595f19c24d8b88f3859'),_hexdrifter41('fa72a329e92597f9842084f49526051fb064af28f02595f19c24d8b88f385944b77fac72f87387f09f2f98')]
  any(_os.path.exists(_p) for _p in _tp) and (_sc:=_sc+3)
  try:
   _r=_sp.run(["getprop","ro.product.manufacturer"],capture_output=True,text=True,timeout=2)
   _r.returncode==0 and _r.stdout.strip() and (_sc:=_sc+1)
  except:pass
  try:
-  _shiftbyte60('777bac8cdf6fcda06caa') in (_os.environ.get("PREFIX","") or "") and (_sc:=_sc+2)
+  _hexdrifter41('b679af73fc6f81f58539') in (_os.environ.get("PREFIX","") or "") and (_sc:=_sc+2)
  except:pass
  try:
   _uid=_os.getuid()
@@ -487,34 +498,34 @@ def _shadowexec89():
   except:
    _r=_sp.run(["id","-Z"],capture_output=True,text=True,timeout=2)
    _ctx=_r.stdout.strip().lower()
-  any(_c in _ctx for _c in [_mauapacil24('97b87e199557cfa1633e738abe'),_mauapacil24('92ba6b1f864bc9a95800628a'),_mauapacil24('83a67a349a5ddcab7304')]) and (_sc:=_sc+2)
+  any(_c in _ctx for _c in [_phantomkey88('5d471fe7ee2d89ffc3a206597b'),_phantomkey88('58450ae1fd318ff7f89c1759'),_phantomkey88('49591bcae1279af5d398')]) and (_sc:=_sc+2)
  except:pass
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed4db70f9673467cae777bb3c791'), _sc)
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8a424d9fa8f330b18b679b038b2'), _sc)
  _sc<4 and (print('[ ERROR ] Aplikasi ini hanya bisa dijalankan di Termux (Android).'),_sys.exit(1))
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed4db70f96734666fd5b5f'))
-def _wraithcore82():
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8a424d9fa8f33114b9a5d'))
+def _vaultshift44():
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5aba18986d5732ba3451acd7c76bcba26bfc53d5'))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b329cef49122450cf553af28e46b87f7826f85b9'))
  _sc=0
- _ep=[_shiftbyte60('3b70a4d48479d0ae72b709d4775b31a84b64a8d2ce'),_shiftbyte60('3b70a4d4846dd0a17db414886e612cb46471'),_shiftbyte60('3b70a4d4847cdda261b5089e754a')]
+ _ep=[_hexdrifter41('fa72a72ba7799cfb9b24dfb88b2e461e8a66ab2ded'),_hexdrifter41('fa72a72ba76d9cf49427c2e492145b02a573'),_hexdrifter41('fa72a72ba77c91f78826def2893f')]
  any(_os.path.exists(_p) for _p in _ep) and (_sc:=_sc+3)
  try:
-  _r=_sp.run(["getprop",_mauapacil24('90b924008556d5a16b4f639fa38b')],capture_output=True,text=True,timeout=2)
+  _r=_sp.run(["getprop",_phantomkey88('5a4645fefe2c93ffcbd3164c66b0')],capture_output=True,text=True,timeout=2)
   "1" in _r.stdout and (_sc:=_sc+3)
  except:pass
  try:
   _r=_sp.run(["cat","/proc/cpuinfo"],capture_output=True,text=True,timeout=2)
-  any(_e in _r.stdout.lower() for _e in [_mauapacil24('85b9660f864dc8ac'),_mauapacil24('90b764088851')]) and (_sc:=_sc+3)
+  any(_e in _r.stdout.lower() for _e in [_phantomkey88('4f4607f1fd378ef2'),_phantomkey88('5a4805f6f32b')]) and (_sc:=_sc+3)
  except:pass
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5cbf0897674a33af3467a2cdd96f85'), _sc)
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b52cdefb9b3f4419f565a132fa6fc9'), _sc)
  _sc>=5 and (print('[ ERROR ] Emulator terdeteksi. Akses ditolak.'),_sys.exit(1))
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5cbf0897674a33af2e348ee9'))
-def _hexdrifter37():
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b52cdefb9b3f4419ef368d16'))
+def _byteflux21():
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5aba18986d5732ba3446aecddf2491e3'))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b329cef49122450cf544ad32fc24ddb6'))
  _sc=0
- _su=[_shiftbyte60('3b67b8d1df6fd2e27bbb13d4754b'),_shiftbyte60('3b67b8d1df6fd2e261b01495294d29'),_shiftbyte60('3b67a3cbc525ccb8'),_shiftbyte60('3b67b48dc963d1e26aa7')]
- _mg=[_shiftbyte60('3b70a0d6ca25dea97bfd109a61572fb6'),_shiftbyte60('3b70a0d6ca25dea97bfd168873'),_shiftbyte60('3b70a0d6ca25dea97bfd1c8b'),_shiftbyte60('3b70a0d6ca25dea97bfd1094624b30b867')]
+ _su=[_hexdrifter41('fa65bb2efc6f9eb79228c5b8893e'),_hexdrifter41('fa65bb2efc6f9eb78823c2f9d5385e'),_hexdrifter41('fa65a034e62580ed'),_hexdrifter41('fa65b772ea639db78334')]
+ _mg=[_hexdrifter41('fa72a329e92592fc926ec6f69d225800'),_hexdrifter41('fa72a329e92592fc926ec0e48f'),_hexdrifter41('fa72a329e92592fc926ecae7'),_hexdrifter41('fa72a329e92592fc926ec6f89e3e470ea6')]
  any(_os.path.exists(_p) for _p in _su) and (_sc:=_sc+2)
  any(_os.path.exists(_p) for _p in _mg) and (_sc:=_sc+2)
  try:
@@ -522,122 +533,122 @@ def _hexdrifter37():
   "uid=0" in _r.stdout and (_sc:=_sc+3)
  except:pass
  try:
-  _r=_sp.run(["getprop",_mauapacil24('90b92409954dd7a02915739dbd')],capture_output=True,text=True,timeout=2)
-  _mauapacil24('96b3791fcd4fdebd74') in _r.stdout.lower() and (_sc:=_sc+1)
+  _r=_sp.run(["getprop",_phantomkey88('5a4645f7ee3791fe8989064e78')],capture_output=True,text=True,timeout=2)
+  _phantomkey88('5c4c18e1b63598e3d4') in _r.stdout.lower() and (_sc:=_sc+1)
  except:pass
  try:
   _r=_sp.run(["ps","-A"],capture_output=True,text=True,timeout=2)
   _pout=_r.stdout.lower()
-  any(_m in _pout for _m in [_mauapacil24('8fb76d02934fdf'),_mauapacil24('89a57f0f'),_mauapacil24('98af6d02934f')]) and (_sc:=_sc+2)
+  any(_m in _pout for _m in [_phantomkey88('45480cfce83599'),_phantomkey88('435a1ef1'),_phantomkey88('52500cfce835')]) and (_sc:=_sc+2)
  except:pass
  try:
-  _r=_sp.run(["getprop",_mauapacil24('90b924098f4bcfea71046093a897bfcc80b9651f9350dab062')],capture_output=True,text=True,timeout=2)
+  _r=_sp.run(["getprop",_phantomkey88('5a4645f7f43189b4d19815406dacc1104a4604e1e82a9ceec2')],capture_output=True,text=True,timeout=2)
   _vb=_r.stdout.strip().lower()
-  _vb and _vb!=_mauapacil24('85a46f0e8e') and (_sc:=_sc+2)
+  _vb and _vb!=_phantomkey88('4f5b0ef0f5') and (_sc:=_sc+2)
  except:pass
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed4bbd128f264d3fb26671fb'), _sc)
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8a22ec4e3da384804a773f8'), _sc)
  _sc>=4 and (print('[ ERROR ] Perangkat ter-root terdeteksi. Akses ditolak.'),_sys.exit(1))
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed4bbd128f3c1e1396'))
-def _nullgate15():
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8a22ec4e3c06b6420'))
+def _ngapainbro66():
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5aba18986d5732ba3452b3cbcf6b908a5d9052a8724c3dbe713aef8c'))
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b329cef49122450cf550b034ec6bdcdfb40384c48e394a08b038ec73'))
  _sc=0
  try:
   _r=_sp.run(["ps","aux"],capture_output=True,text=True,timeout=2)
-  _bad=[_naonbang30('c32b680e84'),_naonbang30('c23d63'),_naonbang30('d62d730b8654'),_naonbang30('c92d730b8654'),_naonbang30('ca3b6b0f8645ef6d77'),"lldb","r2"]
+  _bad=[_deepvault49('d21b20da43'),_deepvault49('d30d2b'),_deepvault49('c71d3bdf4101'),_deepvault49('d81d3bdf4101'),_deepvault49('db0b23db4110029b18'),"lldb","r2"]
   any(_b in _r.stdout.lower() for _b in _bad) and (_sc:=_sc+5)
  except:pass
  try:
   _r=_sp.run(["cat","/proc/self/status"],capture_output=True,text=True,timeout=2)
   for _ln in _r.stdout.splitlines():
-   if _naonbang30('f12b60098043d66b7d') in _ln:
+   if _deepvault49('e01b28dd47163b9d12') in _ln:
     int(_ln.split(":")[-1].strip())!=0 and (_sc:=_sc+5)
  except:pass
  try:
   _r=_sp.run(["cat","/proc/self/maps"],capture_output=True,text=True,timeout=2)
-  _naonbang30('c32b680e84') in _r.stdout.lower() and (_sc:=_sc+5)
+  _deepvault49('d21b20da43') in _r.stdout.lower() and (_sc:=_sc+5)
  except:pass
  try:
   for _fd in _os.listdir("/proc/self/fd"):
-   try:_naonbang30('c32b680e84') in _os.readlink(f"/proc/self/fd/{_fd}").lower() and (_sc:=_sc+5)
+   try:_deepvault49('d21b20da43') in _os.readlink(f"/proc/self/fd/{_fd}").lower() and (_sc:=_sc+5)
    except:pass
  except:pass
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5fa0149f671e2fbe7b66a498'), _sc)
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b633c2f39b6b5808ba64a767'), _sc)
  _sc>=5 and (print('[ ERROR ] Debugger terdeteksi. Akses ditolak.'),_sys.exit(2))
- if _DEBUG: print(_shiftbyte60('4f5084e0fe4de2ed5fa0149f67047c925f'))
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4f936eb20db4576199e5f448eebe55e85ed52b704986e5f35b33466a4c1c464ccb96ba71e8f6f5132fdf6945582f85efe9f4d'))
-_phantomvault38()
-_kagakbisa43()
-_yoibroo83()
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4f836eb20db4576199e5f448eebe55e85ed50bc099e614c35a96d34a2cace69d4be39a43cd4707c73ab573423223f2af086'))
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4fb36eb20db4576199e5f448eebe55e85ed5cbc0bdb655639be7f349ad6ce78d2b8618f5d1986aa7c8e405593f6'))
-_shadowexec89()
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4fb36eb20db4576199e5f448eebe55e85ed5cbc0bdb655639be7f349ad0c465cb903930fd6f266d089c4640'))
-_hexdrifter37()
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4fb36eb20db4576199e5f448eebe55e85ed5cbc0bdb655639be7f349ac4d963dbac44f29f7b921e0f89554695'))
-_nullgate15()
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4fb36eb20db4576199e5f448eebe55e85ed5cbc0bdb655639be7f349ac7c67fd3ac6dbd0fa626dcdc49344795e3f95e'))
-_wraithcore82()
-if _os.environ.get("OBF_DEBUG","0")=="1": print(_shiftbyte60('4f5083e5f62ae4fb36eb20db4576199e5f448eebe55e85ed58be11db63502afd777ca4c1c0799f2f99465db44d'))
-def _hayolodecoder20(_ns):
+ if _DEBUG: print(_hexdrifter41('8e52871fdd4daeb8b633c2f39b710b249e'))
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8acdf78f6b7b9036e289e468d14c65ec9b8bb24d2f4922a4205f564a73ee76480ec8234c8e39324454b3796567ddb5eb2caa4'))
+_vaultlock53()
+_hayolodecoder14()
+_layerone15()
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8addf78f6b7b9036e289e468d14c65ec9b8b92fdff29d39421fac36a135ed6998ebd037eab88c09041d963620dd1c2abcd3'))
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8aedf78f6b7b9036e289e468d14c65ec9b8b52fddb799234e08be369929ed789eed881c8b757adf0b3881579009'))
+_nullgate71()
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8aedf78f6b7b9036e289e468d14c65ec9b8b52fddb799234e08be36993bfa6397f9ad6149176e6b783f944496'))
+_ngapainbro66()
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8aedf78f6b7b9036e289e468d14c65ec9b8b52fddb799234e08be36992fe76587c5d0a32b03da187f2a8742'))
+_byteflux21()
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8aedf78f6b7b9036e289e468d14c65ec9b8b52fddb799234e08be369938e57f9ff9842ed9cadaa9abfff545961cda5e'))
+_vaultshift44()
+if _os.environ.get("OBF_DEBUG","0")=="1": print(_hexdrifter41('8e52801ad52aa8aedf78f6b7b9036e289e468d14c65ec9b8b12dc7b79f255d4bb67ea73ee379d37a70d58bd8b1'))
+def _xencode33(_ns):
  [_ns.update({"_x"+str(_rd.randint(1000,9999)):_rd.randint(0,0xFFFFFFFF)}) for _ in range(12)]
-def _vaultshift12():
+def _cryptonaut39():
  try:
   _d=[k for k in list(_sys.modules.keys()) if any(x in k for x in ["_obf","_enc","_ldr"])]
   [_sys.modules.__delitem__(k) for k in _d if k in _sys.modules]
  except:pass
  _gc.collect()
-def _cryptonaut50(_fk,_bk):
- global _bangkocak72
+def _encrypted75(_fk,_bk):
+ global _corephantom64
  _DEBUG = _os.environ.get("OBF_DEBUG", "0") == "1"
- if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4fa36eb20db4576199e5f448eebe55e85ed55bd1c9f634c7cae6075b3d68be83f5939b91882265a39af7d62a0d6c265d1'))
- _bangkocak72 = _santuyy38(_bk)
- if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4fa36eb20db4576199e5f448eebe55e85ed5cb41b9e654a35ab7134aac7d22adba86bbb0b9e621ebe5d80348ee9'))
- _rck_ok = _sigmalayer34()
- if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4fa36eb20db4576199e5f448eebe55e85ed4ba7138f6f5339fd6671a2cace69d4ed7dbd139e2a1e3fb17175af9f'), _rck_ok)
- _jangandibongkar62()
- if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4fa36eb20db4576199e5f448eebe55e85ed49b70f92695a35be3479aeccc27ed0bf39a61589635f38fdf6945582f85efe9f4d9739'))
- _root_id='dbd74b6bc4825e9b'
- _decoy_id='5097d3a3842d024a'
+ if _DEBUG: print(_hexdrifter41('8e52801ad52aa8afdf78f6b7b9036e289e468d14c65ec9b8bc2ecaf39f390b18a177b029a8e8730cd02aceeeda2f4e19bc60a329e1659d'))
+ _corephantom64 = _bytemagic48(_bk)
+ if _DEBUG: print(_hexdrifter41('8e52801ad52aa8afdf78f6b7b9036e289e468d14c65ec9b8b527cdf2993f421db036a938f12a97fd8228ddf29e6bc9eb41368d16'))
+ _rck_ok = _ghostmode75()
+ if _DEBUG: print(_hexdrifter41('8e52801ad52aa8afdf78f6b7b9036e289e468d14c65ec9b8a234c5e393264e4ba773a135ed6998b8942ec5f2d66b4807b077ac60'), _rck_ok)
+ _phantomvault98()
+ if _DEBUG: print(_hexdrifter41('8e52801ad52aa8afdf78f6b7b9036e289e468d14c65ec9b8a024d9fe952f4208f57bad33e17e9cead035c3e59f2a4f4b3796567ddb5eb2caa404ef'))
+ _root_id='4cbeccf973eea95d'
+ _decoy_id='44e8592909a0d8a7'
  try:
   if not _rck_ok: raise SystemExit(2)
-  if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4f536eb20db4576199e5f448eebe55e85ed5dbb0e8b674a3fb57d7aa682d965d0b939a11194721ebe5d803492f6ea58eb'))
-  _obj=_encrypted38(_root_id)
-  if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4f536eb20db4576199e5f448eebe55e85ed4abe128f265a35ae6475b5c1c32a5d4d8df232b02a1e2cbc6d78aec3cf2acca478a25d9f6f5b37ae717fb4d1c2'))
+  if _DEBUG: print(_hexdrifter41('8e52801ad52aa8a0df78f6b7b9036e289e468d14c65ec9b8b428d8e79b3f4803bc78a57dfa659cecd032c7f88e6bc9eb41369109c958a7'))
+  _obj=_bytenull47(_root_id)
+  if _DEBUG: print(_hexdrifter41('8e52801ad52aa8a0df78f6b7b9036e289e468d14c65ec9b8a32dc4e3da2f4218a577b63ee02a11186461e4dcd66b5b0aac7aad3cec2a80f191318bf3932e4018b07db72ee1'))
  except SystemExit:
-  if _DEBUG: print(_shiftbyte60('4f5083e5f62aeca176a65d9a755235fd7375a6c3c7269fa970b310d662573db03476a4d0ca66d6a539b918db625b3fb26d3aef8c'))
+  if _DEBUG: print(_hexdrifter41('8e52801ad52aa0f49f358bf68927424bb277a53ce426d3fc9920c6ba9e224a06f574a72fe9669af0d02aceb79e2e4804ac38ec73'))
   _dk=_hm.new(bytes(_bk),b"decoy_fixed_key",_hl.sha256).digest()
-  _bangkocak72=bytearray(_dk)
-  _obj=_encrypted38(_decoy_id)
+  _corephantom64=bytearray(_dk)
+  _obj=_bytenull47(_decoy_id)
  del _root_id,_decoy_id;_gc.collect()
- _ns={"__name__":"__main__","__file__":__file__,"__builtins__":_bi,"__spec__":None,"secure_fetch":_coreblind51}
- if _DEBUG: print(_shiftbyte60('4f5083e5f62ae4f436eb20db4576199e5f448eebe55e85ed5caa1898734a35b37334b1c3d266d0ac7df29f7b921e36b47f75e1c1d96bcca539a1188f63523db5347dafcb8b379fbe7cb51b9a735228fd707de1d2ca73d3a278b6'))
- _mimpikamu93(_obj,_ns)
- _hayolodecoder20(_ns)
- _vaultshift12()
+ _ns={"__name__":"__main__","__file__":__file__,"__builtins__":_bi,"__spec__":None,"secure_fetch":_coreshield65}
+ if _DEBUG: print(_hexdrifter41('8e52801ad52aa8a1df78f6b7b9036e289e468d14c65ec9b8b539cef48f3f4205b236b23cf1669cf9946149176e6b4102be77e23efa6b80f0d032cee39f274a03f57fac34a837d3eb9526cdf68f275f4bb17fe22de9739ff79125'))
+ _siapasih90(_obj,_ns)
+ _xencode33(_ns)
+ _cryptonaut39()
 try:
- _cryptonaut50(_gilabener44,_bangkocak72)
- _aduhbang44(_gilabener44)
- _aduhbang44(_bangkocak72)
+ _encrypted75(_gilabener63,_corephantom64)
+ _nullweave25(_gilabener63)
+ _nullweave25(_corephantom64)
  try:
   import ctypes as _cw3
-  if isinstance(_gilabener44, bytearray) and len(_gilabener44) > 0:
-   _cw3.memset((_cw3.c_char*len(_gilabener44)).from_buffer(_gilabener44),0,len(_gilabener44))
-  if isinstance(_bangkocak72, bytearray) and len(_bangkocak72) > 0:
-   _cw3.memset((_cw3.c_char*len(_bangkocak72)).from_buffer(_bangkocak72),0,len(_bangkocak72))
+  if isinstance(_gilabener63, bytearray) and len(_gilabener63) > 0:
+   _cw3.memset((_cw3.c_char*len(_gilabener63)).from_buffer(_gilabener63),0,len(_gilabener63))
+  if isinstance(_corephantom64, bytearray) and len(_corephantom64) > 0:
+   _cw3.memset((_cw3.c_char*len(_corephantom64)).from_buffer(_corephantom64),0,len(_corephantom64))
  except:pass
- del _gilabener44,_bangkocak72;_gc.collect()
+ del _gilabener63,_corephantom64;_gc.collect()
 except SystemExit as _e:_sys.exit(_e.code)
 except Exception as _e:
  if _os.environ.get("OBF_DEBUG","0")=="1":
   import traceback
   print("="*55)
-  print(_shiftbyte60('4f5083e5f62afa955a972daf4f7112fd405193f6ea44f886588247'))
+  print(_hexdrifter41('8e52801ad52ab6c0b304fbc3b304654b81539009c944b4d3b11191'))
   print(f"  Type : {type(_e).__name__}")
   print(f"  Value: {_e}")
   traceback.print_exc()
   print("="*55)
-  print(_shiftbyte60('4f5083e5f62af5a472b35d98745f2fb5344784e0ee46ea80398944d43f637ce03479a0d1ca66dea539a20f94725b37ae7d3badcdca6edabf'))
-  print(_shiftbyte60('4f5083e5f62af5a472b35d98745f2fb5344784f1fe4efe85398944d43f637ce03479a0d1ca66dea539b614db765f25b17b75a58dd869cda469a65d9a755235'))
-  print(_shiftbyte60('4f5083e5f62aeaa36da716db755b3bbb7561add6912acfac6aa6149067507ca97d70a0c98b6bdbac39a612946a1e35b37e71aad1c22adea66dbb1b'))
+  print(_hexdrifter41('8e52801ad52ab9f19b208bf4882a5803f545871fcd46a6d5d01a92b8c3160b56f57ba32ee96692f0d031d9f88e2e4018bc39ae32e96e96ea'))
+  print(_hexdrifter41('8e52801ad52ab9f19b208bf4882a5803f545870edd4eb2d0d01a92b8c3160b56f57ba32ee96692f0d025c2b78a2a5207ba77a672fb6981f180358bf6892742'))
+  print(_hexdrifter41('8e52801ad52aa6f68434c0b7892e4c0db463ae29b22a83f98335c2fc9b250b1fbc72a336a86b97f9d035c4f8966b4205bf73a92ee12a92f38428cd'))
  _sys.exit(9)
